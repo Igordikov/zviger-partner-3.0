@@ -1,0 +1,330 @@
+ 
+@font-face {
+    font-family: 'Ermilov';
+    src: url('./fonts/ermilov/Ermilov-bold.woff2') format('woff2'),
+         url('./fonts/ermilov/Ermilov-bold.woff') format('woff'),
+         url('./fonts/ermilov/Ermilov-bold.otf') format('opentype');
+    font-weight: bold;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Codec Pro';
+    src: url('./fonts/codec-pro/CodecPro-Regular.ttf') format('woff2'),
+         url('./fonts/codec-pro/CodecPro-Regular.woff') format('woff'),
+         url('./fonts/codec-pro/CodecPro-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+  
+ 
+ /* -------------------------------------------------------АДАПТИВКА----------------------------------------------------------- */
+ 
+
+  
+  /* Мобильные устройства */
+
+    .container {
+      max-width: 100%;
+      padding: 0 20px;
+    }
+
+    .header-container {
+
+        padding: 15px 20px;
+         display: flex;
+         align-items: center;
+         justify-content: space-between;
+       }
+     
+       .header {
+         position: fixed;
+         top: 0;
+         left: 0;
+         width: 100%;
+         background: #f9f2e5; /* Цвет фона */
+         z-index: 1000; /* Убедимся, что шапка выше остальных элементов */
+         
+         margin: 0 auto;
+         border-bottom: 1px solid #dbd3c2;
+     }
+       
+       .nav-mobile-container {
+         display: flex;
+         flex-wrap: nowrap;
+         align-items: center;
+         justify-content: space-between;
+       }
+     
+      
+    /* ------------------------------burger--------------------- */
+  /* CSS */
+.burger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+    background: #efa201;
+  }
+
+
+  
+   /* ------------------------------///burger--------------------- */
+
+   /* ----------------------------HERO-------------------------------- */
+   .hero-section {
+    position: relative;
+    background-image: url('./img/hero-image-mobile.webp');
+    background-size: cover;
+    background-position: center;
+   height: 691px;
+    padding-top: 64px;
+  }
+  
+  .hero-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2); /* Черный полупрозрачный слой */
+  }
+  
+  .title-hero-text {
+    font-family: 'Ermilov';
+    width: 318px;
+ padding: 0 14px;
+    position: relative; /* Поверх затемнения */
+    text-shadow: 0 0 77px rgba(0, 0, 0, 0.55);
+    z-index: 1;
+font-weight: 700;
+font-size: 36px;
+line-height: 115%;
+text-transform: uppercase;
+color:  #ffb61d;
+background: linear-gradient(270deg, #efa201 0%, #ffb61d 100%);
+background-clip: text;
+  }
+
+  .subtitle-hero-text-mobile {
+    font-family:'Codec Pro';
+  margin: 300px auto 78px;
+line-height: 115%;
+text-transform: uppercase;
+color:  #efefef;
+text-shadow: 0 0 77px rgba(0, 0, 0, 0.33);
+  }
+
+    /* ----------------------------///HERO-------------------------------- */
+   
+  /* Скрытые элементы */
+  .nav-desktop-list {
+    display: none;
+  }
+  
+  .language-switcher {
+    display: none;
+  }
+  
+  .header-nav {
+    display: flex;
+    align-items: center;
+  }
+
+  .feedback-button {
+    display: none;
+  }
+
+  
+
+
+
+
+
+
+  /* Планшеты + нетбуки */
+  @media screen and (min-width: 1080px) {
+    .container {
+      max-width: 90%;
+      padding: 0 32px;
+    }
+
+    .burger {
+        display: none;
+       }
+      
+    
+       .nav-desktop-container {
+        display: flex;
+       }
+
+       .nav-desktop-list {
+        display: flex;
+        gap: 15px; 
+      }
+    
+      .nav-desktop-item {
+        position: relative; /* Теперь позиция будет определяться внутри элемента */
+        
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 90%;
+    
+      }
+    
+      .underline {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 0;
+        height: 2px;
+        background-color: #000;
+        transition: width 0.3s ease-in-out;
+    }
+    
+    .nav-desktop-item:hover .underline,
+    .nav-desktop-item.active .underline {
+        width: 100%;
+    }
+    
+    .nav-tel-number a {
+      display: inline-block;
+      transition: text-shadow 0.3s ease-in-out;
+    }
+    
+    .nav-tel-number a:hover {
+      text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
+    }
+    
+    
+      .language-switcher {
+        border: 1px solid #dbd3c2;
+        border-radius: 4px;
+        padding: 10px;
+        display: flex;
+        gap: 7px;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+        background-color: #fff;
+        position: relative;
+        font-family: "Roboto", sans-serif;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 1;
+        color: #000;
+        margin-left: 20px;
+    }
+    
+    .language-switcher:hover {
+        background-color: #f0f0f0;
+    }
+    
+    .feedback-button {
+      
+      display: block;
+      align-items: center;
+      background: #efa201;
+      border-radius: 5px;
+      padding: 12px 28px;
+      width: 191px;
+      height: 40px;
+      border: none;
+      color: white;
+      cursor: pointer;
+       font-family: "Roboto", sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      line-height: 1;
+      color: #000;
+      margin-left: 10px;
+    }
+    
+    .feedback-button:hover {
+      background-color: #d18b01; /* Темнее при наведении */
+    }
+
+   
+  }
+
+
+  
+  /* Десктопы */
+  @media screen and (min-width: 1441px) {
+    .container {
+      max-width: 1680px;
+      padding: 0 93px;
+    }
+
+       
+    .nav-desktop-list {
+        display: flex;
+        gap: 35px; 
+      }
+    
+      .nav-desktop-item {  
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 90%;
+      }
+
+     
+
+   
+    /* --------------------------------HERO------------------------------ */
+
+    .hero-section {
+        background-image: url('./img/hero-image-desktop.webp'); /* Укажите путь к изображению */
+        background-size: cover; /* Масштабирование */
+        background-position: center; /* Центрирование */
+       height: 1030px;
+       
+      }
+
+      .titles-hero {
+        margin: 400px auto 15px;
+      }
+      
+      .title-hero-text {
+        
+        width: 1734px;
+        font-weight: 700;
+        font-size: 80px;
+        line-height: 115%;
+        text-transform: uppercase;
+        text-align: center;
+        background: linear-gradient(270deg, #efa201 0%, #ffb61d 100%);
+        background-clip: text;
+        
+      }
+
+      .subtitle-hero-text-mobile {
+        display: none !important; /* Принудительное скрытие */
+    }
+    
+
+
+      .subtitle-hero-text-desktop {
+          display: block;
+          width: 1239px;
+          font-weight: 700;
+          font-size: 32px;
+          line-height: 115%;
+          text-transform: uppercase;
+          text-align: center;
+          margin-top: 20px;
+        }
+     
+        /* --------------------------------HERO------------------------------ */
+  
+  }
+
+  
+    /* -------------------------------------------------------///АДАПТИВКА----------------------------------------------------------- */
+
+
