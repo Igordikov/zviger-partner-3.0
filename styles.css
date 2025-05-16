@@ -290,50 +290,65 @@ padding: 25px 0;
 }
 .perevagi-wrapper {
   display: flex;
-flex-direction: column;
-gap: 15px;
-align-items: center;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
 }
 
 .perevagi-slider {
-  overflow: hidden;
- 
-  max-width: 320px; /* или 100%, если адаптивно */
+  overflow: hidden; /* Обязательно для обрезки лишних карточек */
+  max-width: 320px; /* Фиксированная максимальная ширина видимой области */
+  width: 100%;      /* Для адаптивности до max-width */
+  margin: 0 auto;   /* Если нужно центрировать сам слайдер */
 }
 
 .perevagi-track {
   display: flex;
-  transition: transform 0.4s ease;
-  gap: 10px; /* добавим расстояние между карточками */
- 
-
+  /* gap: 10px; */ /* Убрал отсюда, т.к. добавляем отступ к карточкам для более предсказуемого offsetWidth */
+  transition: transform 0.4s ease; /* 400ms - важно для JS */
+  /* Если убрали gap, то начальное положение будет без отступов слева от первой карты */
 }
 
 .perevagi-card {
+  box-sizing: border-box; /* !!!!! ОЧЕНЬ ВАЖНО для корректных размеров с padding !!!!! */
+  
+  /* Ширина карточки должна быть равна ширине видимой области слайдера */
+  min-width: 320px; 
   padding: 25px 17px;
- min-width: 100%;
- 
   border-radius: 10px;
   background-color: #f9f2e5;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 15px; /* Внутренний gap для контента карточки */
   justify-content: space-around;
-  height: 220px;
-  
+  height: 220px; /* Фиксированная высота */
+
+  /* Добавляем правый отступ для имитации gap, если убрали из .perevagi-track */
+  margin-right: 10px;
 }
+
+.perevagi-card svg {
+  flex-shrink: 0; /* Запрещаем SVG сжиматься как flex-элементу */
+  /* Можно также явно задать размеры еще раз, хотя атрибуты должны работать */
+  /* width: 34px; */
+  /* height: 34px; */
+}
+
+/* Убираем отступ у последнего элемента в ОРИГИНАЛЬНОМ наборе и у последнего клона. */
+/* Это нужно будет делать аккуратно, так как клоны добавляются. */
+/* Проще всего не убирать margin-right и принять, что после последней карточки будет отступ, */
+/* либо делать это в JS при клонировании или стилизовать клоны отдельно. */
+/* Пока оставим margin-right: 10px для всех, включая клоны, для простоты расчета cardWidth */
 
 .perevagi-card-text {
-width: 85%;
-font-weight: 400;
-font-size: 14px;
-line-height: 140%;
-color: black;
+  width: 85%; /* Это может быть причиной проблем с паддингами, если текст слишком длинный */
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  color: black;
 }
 
-
 .arrow-btn {
-
   background: #fdf6eb;
   border: none;
   border-radius: 6px;
@@ -341,13 +356,19 @@ color: black;
   height: 34px;
   font-size: 12px;
   cursor: pointer;
+  display: flex; /* Для центрирования стрелок, если они текстовые */
+  align-items: center;
+  justify-content: center;
 }
 
 .arrows-box-perevagi {
   display: flex;
   gap: 10px;
   align-self: flex-end; /* <-- сместит вправо */
+  margin-right: 10px; /* Если слайдер 320px, а кнопки выровнены по perevagi-wrapper */
+                     /* Лучше выравнивать кнопки относительно самого слайдера */
 }
+
 
 
 
