@@ -313,6 +313,24 @@
 
 <!-- УСЛУГИ -->
 <script>
+    const wrappers = document.querySelectorAll('.service-wrapper');
+  
+    wrappers.forEach(wrapper => {
+      const card = wrapper.querySelector('.service-card');
+      card.addEventListener('click', () => {
+        wrappers.forEach(w => {
+          if (w !== wrapper) {
+            w.classList.remove('expanded');
+          }
+        });
+        wrapper.classList.toggle('expanded');
+      });
+    });
+  </script>
+
+<!-- ПЕРЕВАГИ -->
+
+<script>
     document.addEventListener('DOMContentLoaded', () => {
       const track = document.querySelector('.perevagi-track');
       const cards = document.querySelectorAll('.perevagi-card');
