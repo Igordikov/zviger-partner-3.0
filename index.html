@@ -331,31 +331,60 @@
 <!-- ПЕРЕВАГИ -->
 
 <script>
-    const track = document.querySelector('.perevagi-track');
-    const cards = document.querySelectorAll('.perevagi-card');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-  
-    let currentIndex = 0;
-  
-    function updateSlider() {
-      const offset = -currentIndex * 100;
-      track.style.transform = `translateX(${offset}%)`;
-    }
-  
-    nextBtn.addEventListener('click', () => {
-      if (currentIndex < cards.length - 1) {
-        currentIndex++;
-        updateSlider();
-      }
-    });
-  
-    prevBtn.addEventListener('click', () => {
-      if (currentIndex > 0) {
-        currentIndex--;
-        updateSlider();
-      }
-    });
+ const track = document.querySelector('.perevagi-track');
+const cards = document.querySelectorAll('.perevagi-card');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+
+let currentIndex = 0;
+
+function updateSlider() {
+  const cardWidth = cards[0].offsetWidth + 15; // учитываем gap между карточками
+  const offset = -currentIndex * cardWidth;
+  track.style.transform = `translateX(${offset}px)`;
+}
+
+nextBtn.addEventListener('click', () => {
+  if (currentIndex < cards.length - 1) {
+    currentIndex++;
+    updateSlider();
+  }
+});
+
+prevBtn.addEventListener('click', () => {
+  if (currentIndex > 0) {
+    currentIndex--;
+    updateSlider();
+  }
+});
+
+let startX = 0;
+let endX = 0;
+
+track.addEventListener('touchstart', (e) => {
+  startX = e.touches[0].clientX;
+});
+
+track.addEventListener('touchend', (e) => {
+  endX = e.changedTouches[0].clientX;
+  handleSwipe();
+});
+
+function handleSwipe() {
+  const swipeDistance = endX - startX;
+
+  if (swipeDistance > 50 && currentIndex > 0) {
+    // свайп вправо (показать предыдущую)
+    currentIndex--;
+    updateSlider();
+  } else if (swipeDistance < -50 && currentIndex < cards.length - 1) {
+    // свайп влево (показать следующую)
+    currentIndex++;
+    updateSlider();
+  }
+}
+
+
   </script>
   
   

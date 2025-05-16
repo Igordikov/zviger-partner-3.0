@@ -298,12 +298,13 @@ align-items: center;
 .perevagi-slider {
   overflow: hidden;
   width: 100%;
-  max-width: 340px;
+  max-width: 340px; /* или 100%, если адаптивно */
 }
 
 .perevagi-track {
   display: flex;
   transition: transform 0.4s ease;
+  gap: 15px; /* добавим расстояние между карточками */
 }
 
 .perevagi-card {
