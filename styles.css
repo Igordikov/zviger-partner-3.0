@@ -403,6 +403,17 @@ filter: blur(5.443979263305664px);
   height: auto;
 }
 
+.spivpracia-container {
+  padding: 30px 40px 87px 40px;
+}
+
+.subtitle-spivpracia {
+font-weight: 700;
+font-size: 32px;
+line-height: 100%;
+color: white;
+}
+
 /* -------------------------------------///СПІВПРАЦЯ----------------------------------------------- */
 
 
