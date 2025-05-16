@@ -214,7 +214,7 @@ color: #000;
   overflow: hidden;
   transition: max-height 0.4s ease, padding 0.4s ease;
   padding: 0 20px; /* добавим боковые отступы сразу */
-  background-color: #f5f5f5;
+ 
   border-radius: 0 0 8px 8px;
   color: #333;
   font-size: 14px;
@@ -222,8 +222,9 @@ color: #000;
 }
 
 .service-wrapper.expanded .service-description {
-  max-height: 300px; /* подбери под длину текста, можно больше */
+  max-height: 300px;
   padding: 10px 20px;
+  background-color: #f9f2e5;
 }
 .service-card {
   cursor: pointer;
@@ -233,6 +234,8 @@ color: #000;
 
 .service-wrapper.expanded .service-card {
   border-radius: 8px 8px 0 0;
+  background-color:#d18b01;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.);
 }
 
 .service-card::after {
@@ -279,6 +282,63 @@ padding: 25px 0;
 /* ------------------------------------///СЕКЦИЯ О НАС-------------------------------------- */
 
 
+
+/* --------------------------------------СЕКЦИЯ ПЕРЕВАГИ----------------------------------- */
+
+.section-perevagi {
+  padding: 25px 0;
+}
+.perevagi-wrapper {
+  display: flex;
+flex-direction: column;
+gap: 15px;
+align-items: center;
+}
+
+.perevagi-slider {
+  overflow: hidden;
+  width: 100%;
+  max-width: 340px;
+}
+
+.perevagi-track {
+  display: flex;
+  transition: transform 0.4s ease;
+}
+
+.perevagi-card {
+  min-width: 100%;
+  padding: 25px 17px;
+  border-radius: 10px;
+  background-color: #f9f2e5;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: space-around;
+  height: 220px;
+}
+
+
+.arrow-btn {
+
+  background: #fdf6eb;
+  border: none;
+  border-radius: 6px;
+  width: 34px;
+  height: 34px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.arrows-box-perevagi {
+  display: flex;
+  gap: 10px;
+  align-self: flex-end; /* <-- сместит вправо */
+}
+
+
+
+/* --------------------------------------///СЕКЦИЯ ПЕРЕВАГИ----------------------------------- */
 
   /* Планшеты + нетбуки */
   @media screen and (min-width: 1080px) {
