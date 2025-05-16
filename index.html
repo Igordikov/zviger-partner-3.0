@@ -331,71 +331,198 @@
 <!-- ПЕРЕВАГИ -->
 
 <script>
- const track = document.querySelector('.perevagi-track');
-const cards = document.querySelectorAll('.perevagi-card');
+const track = document.querySelector('.perevagi-track');
+const cards = Array.from(document.querySelectorAll('.perevagi-card')); // Преобразуем в массив
 const prevBtn = document.getElementById('prevBtn');
 const nextBtn = document.getElementById('nextBtn');
 
 let currentIndex = 0;
+let cardWidth = 0;
+const numCards = cards.length; // Сохраняем количество карточек
 
-function updateSlider() {
-  const cardWidth = cards[0].offsetWidth + 15; // учитываем gap между карточками
-  const offset = -currentIndex * cardWidth;
-  track.style.transform = `translateX(${offset}px)`;
+// --- Начало: Логика для "бесконечного" слайдера с клонами ---
+let actualCards = cards; // Исходные карточки
+let trackWrapper = track; // Исходный трек
+
+function setupInfiniteSlider() {
+    if (numCards <= 1) return; // Нет смысла зацикливать, если карточек мало
+
+    // Клонируем первый и последний элементы
+    const firstClone = actualCards[0].cloneNode(true);
+    firstClone.classList.add('clone'); // Добавим класс для возможной отладки или стилизации
+    const lastClone = actualCards[numCards - 1].cloneNode(true);
+    lastClone.classList.add('clone');
+
+    // Вставляем клоны
+    trackWrapper.appendChild(firstClone);
+    trackWrapper.insertBefore(lastClone, actualCards[0]);
+
+    // Обновляем список карточек, включив клоны
+    // cards = Array.from(trackWrapper.querySelectorAll('.perevagi-card')); // Теперь cards включает клоны
+    // numCardsWithClones = cards.length;
+
+    // Начальный индекс должен указывать на первую "реальную" карточку
+    currentIndex = 1; // Так как перед ней теперь клон последней
+    updateSlider(false, true); // Первоначальное смещение без анимации и с учетом клонов
+}
+// --- Конец: Логика для "бесконечного" слайдера с клонами ---
+
+
+function calculateCardWidth() {
+    if (actualCards.length > 0) { // Используем actualCards для расчета ширины
+        // cards[0].offsetWidth может быть 0, если элемент или родитель скрыт (display:none)
+        // или еще не отрисован. Убедитесь, что слайдер видим при инициализации.
+        const style = window.getComputedStyle(actualCards[0]);
+        // Учитываем gap из CSS родителя .perevagi-track (15px)
+        cardWidth = actualCards[0].offsetWidth + 15; // 15px - это ваш CSS gap
+    } else {
+        cardWidth = 0;
+    }
 }
 
+// `noAnimation` для мгновенного перехода, `isInitialSetup` для установки начальной позиции с клонами
+function updateSlider(animate = true, isInitialSetup = false) {
+    if (cardWidth === 0 && actualCards.length > 0) calculateCardWidth();
+    if (cardWidth === 0 && actualCards.length > 0) {
+        return;
+    }
+
+    const offset = -currentIndex * cardWidth;
+
+    if (animate) {
+        trackWrapper.style.transition = 'transform 0.4s ease';
+    } else {
+        trackWrapper.style.transition = 'none'; // Отключаем анимацию для мгновенного перемещения
+    }
+    trackWrapper.style.transform = `translateX(${offset}px)`;
+}
+
+
+window.addEventListener('load', () => {
+    if (actualCards.length === 0) return;
+    calculateCardWidth();
+    if (actualCards.length > 1) { // Запускаем setupInfiniteSlider только если есть что зацикливать
+        setupInfiniteSlider();
+    } else {
+        updateSlider(false); // Обычная инициализация для одной карточки
+    }
+});
+
+window.addEventListener('resize', () => {
+    if (actualCards.length === 0) return;
+    calculateCardWidth();
+    // При ресайзе нужно правильно пересчитать позицию, особенно с клонами
+    // Если клоны есть, currentIndex уже будет смещен на 1
+    // Если нет, то currentIndex 0
+    let reInitCurrentIndex = currentIndex;
+    if (actualCards.length <=1) { // если карточка одна или нет
+        reInitCurrentIndex = 0;
+    }
+    // Для системы с клонами, `currentIndex` уже правильный (1 для первого реального слайда).
+    // Просто обновляем позицию без анимации.
+    updateSlider(false);
+});
+
+
 nextBtn.addEventListener('click', () => {
-  if (currentIndex < cards.length - 1) {
+    if (actualCards.length <= 1) return; // Если одна реальная карточка, ничего не делаем (или вообще отключаем кнопки)
+
     currentIndex++;
     updateSlider();
-  }
+
+    // Если перешли на клон первого элемента (который в конце)
+    if (currentIndex === (actualCards.length + 1)) { // +1 из-за клона в начале, еще +1 для клона в конце
+        // Ждем окончания анимации и "прыгаем" на реальный первый элемент
+        setTimeout(() => {
+            currentIndex = 1; // Индекс реального первого элемента
+            updateSlider(false); // Мгновенный переход
+        }, 400); // Должно совпадать с длительностью transition
+    }
 });
 
 prevBtn.addEventListener('click', () => {
-  if (currentIndex > 0) {
+    if (actualCards.length <= 1) return;
+
     currentIndex--;
     updateSlider();
-  }
+
+    // Если перешли на клон последнего элемента (который в начале)
+    if (currentIndex === 0) {
+        // Ждем окончания анимации и "прыгаем" на реальный последний элемент
+        setTimeout(() => {
+            currentIndex = actualCards.length; // Индекс реального последнего элемента
+            updateSlider(false); // Мгновенный переход
+        }, 400); // Должно совпадать с длительностью transition
+    }
 });
 
 let startX = 0;
+let currentTranslate = 0;
+let prevTranslate = 0;
 let isDragging = false;
 
-track.addEventListener('touchstart', (e) => {
-  startX = e.touches[0].clientX;
-  isDragging = true;
+trackWrapper.addEventListener('touchstart', (e) => {
+    if (actualCards.length <= 1) return;
+    startX = e.touches[0].clientX;
+    isDragging = true;
+    if (cardWidth === 0) calculateCardWidth();
+    // prevTranslate всегда рассчитывается от текущего currentIndex и cardWidth
+    prevTranslate = -currentIndex * cardWidth;
+    trackWrapper.style.transition = 'none'; // Отключаем анимацию на время перетаскивания
+}, { passive: true });
+
+trackWrapper.addEventListener('touchmove', (e) => {
+    if (!isDragging || actualCards.length <= 1) return;
+    const currentX = e.touches[0].clientX;
+    currentTranslate = prevTranslate + (currentX - startX);
+    trackWrapper.style.transform = `translateX(${currentTranslate}px)`;
+    // e.preventDefault(); // Если нужна отмена вертикального скролла, уберите passive:true
 });
 
-track.addEventListener('touchmove', (e) => {
-  if (!isDragging) return;
-  const currentX = e.touches[0].clientX;
-  const deltaX = currentX - startX;
+trackWrapper.addEventListener('touchend', () => {
+    if (!isDragging || actualCards.length <= 1) return;
+    isDragging = false;
+    const movedBy = currentTranslate - prevTranslate;
+    const threshold = cardWidth * 0.20; // Можно сделать порог меньше для лучшей отзывчивости
 
-  // (опционально) можешь сделать "живой" свайп эффекта
+    let direction = 0; // -1 для влево (next), 1 для вправо (prev)
+
+    if (movedBy < -threshold) {
+        direction = -1; // Свайп влево (показываем следующую карточку)
+    } else if (movedBy > threshold) {
+        direction = 1; // Свайп вправо (показываем предыдущую карточку)
+    }
+
+    if (direction !== 0) {
+        currentIndex -= direction; // Уменьшаем для prev, увеличиваем для next
+        updateSlider(); // Запускаем анимацию к новому слайду
+
+        // Логика "прыжка" после анимации, если достигли клона
+        if (currentIndex === (actualCards.length + 1) && direction === -1) { // Перешли на клон первого (в конце)
+            setTimeout(() => {
+                currentIndex = 1;
+                updateSlider(false);
+            }, 400);
+        } else if (currentIndex === 0 && direction === 1) { // Перешли на клон последнего (в начале)
+            setTimeout(() => {
+                currentIndex = actualCards.length;
+                updateSlider(false);
+            }, 400);
+        }
+    } else {
+        // Возвращаем на место, если свайп был недостаточным
+        updateSlider();
+    }
 });
 
-track.addEventListener('touchend', (e) => {
-  if (!isDragging) return;
-  isDragging = false;
-  const endX = e.changedTouches[0].clientX;
-  const swipeDistance = endX - startX;
-
-  if (swipeDistance > 50 && currentIndex > 0) {
-    // свайп вправо
-    currentIndex--;
-    updateSlider();
-  } else if (swipeDistance < -50 && currentIndex < cards.length - 1) {
-    // свайп влево
-    currentIndex++;
-    updateSlider();
-  }
+trackWrapper.addEventListener('mouseleave', () => { // Используем trackWrapper
+    if (isDragging) {
+        isDragging = false;
+        // Вместо простого updateSlider(), нужно решить, был ли свайп достаточным
+        // Но проще всего просто вернуть на текущий `currentIndex`
+        updateSlider();
+    }
 });
-
-function updateSlider() {
-  const cardWidth = cards[0].offsetWidth + 15; // если есть gap
-  const offset = -currentIndex * cardWidth;
-  track.style.transform = `translateX(${offset}px)`;
-}
 
 
   </script>
