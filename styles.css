@@ -317,6 +317,15 @@ align-items: center;
   gap: 10px;
   justify-content: space-around;
   height: 220px;
+  
+}
+
+.perevagi-card-text {
+width: 85%;
+font-weight: 400;
+font-size: 14px;
+line-height: 140%;
+color: black;
 }
 
 
