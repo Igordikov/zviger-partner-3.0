@@ -389,7 +389,7 @@ padding: 25px 0;
 .mustang-picture {
   position: absolute;
   right: -5%;
-  bottom: 14%;
+  bottom: 12%;
 height: 70%;
 }
 
@@ -413,6 +413,65 @@ font-size: 32px;
 line-height: 100%;
 color: white;
 }
+
+.numbers-box {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  position: relative;
+  margin-left: 15px;
+  margin-top: 45px;
+  width: 100px;
+}
+
+.number-line {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+
+.number-round {
+  width: 44px;
+  height: 44px;
+  border-radius: 100%;
+  background-color: #efa201;
+  font-weight: 900;
+  font-size: 17px;
+  line-height: 140%;
+  text-align: center;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+/* Горизонтальная линия вправо */
+.horizontal-line {
+  flex-grow: 1;
+  height: 2px;
+  background: #efa201;
+}
+
+/* Вертикальный пунктир */
+.numbers-box::before {
+  content: "";
+  position: absolute;
+  left: 22px; /* центр кругов */
+  top: 22px;
+  bottom: 22px;
+  width: 2px;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    #efa201,
+    #efa201 6px,
+    transparent 6px,
+    transparent 12px
+  );
+  z-index: 0;
+}
+
 
 /* -------------------------------------///СПІВПРАЦЯ----------------------------------------------- */
 
