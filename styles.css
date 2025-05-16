@@ -81,8 +81,9 @@
     background-image: url('./img/hero-image-mobile.webp');
     background-size: cover;
     background-position: center;
-   height: 691px;
+  
     padding-top: 64px;
+    padding-bottom: 30px;
   }
   
   .hero-section::before {
@@ -111,7 +112,7 @@ background: linear-gradient(270deg, #efa201 0%, #ffb61d 100%);
 background-clip: text;
   }
 
-  .subtitle-hero-text-mobile {
+  .subtitle-hero-text {
     font-family:'Codec Pro';
   margin: 300px auto 78px;
 line-height: 115%;
@@ -120,6 +121,25 @@ color:  #efefef;
 text-shadow: 0 0 77px rgba(0, 0, 0, 0.33);
   }
 
+  .desktop-title-part {
+    display: none;
+  }
+
+  .consultation-button {
+    display: block;
+    border-radius: 8px;
+    padding: 20px 40px;
+    width: 285px;
+    
+    background-color: #efa201;
+    margin: 0 auto;
+
+font-weight: 600;
+font-size: 18px;
+line-height: 100%;
+text-align: center;
+color: black;
+  }
     /* ----------------------------///HERO-------------------------------- */
    
   /* Скрытые элементы */
