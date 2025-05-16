@@ -30,24 +30,25 @@
       padding: 0 20px;
     }
 
-    .header-container {
-
-        padding: 15px 20px;
-         display: flex;
-         align-items: center;
-         justify-content: space-between;
-       }
+    
      
        .header {
          position: fixed;
          top: 0;
          left: 0;
-         width: 100%;
+       width: 100%;
          background: #f9f2e5; /* Цвет фона */
          z-index: 1000; /* Убедимся, что шапка выше остальных элементов */
          
          margin: 0 auto;
          border-bottom: 1px solid #dbd3c2;
+     }
+
+     .header-container {
+      padding: 15px 20px;
+       display: flex;
+       align-items: center;
+       justify-content: space-between;
      }
        
        .nav-mobile-container {
@@ -81,8 +82,8 @@
     background-image: url('./img/hero-image-mobile.webp');
     background-size: cover;
     background-position: center;
-  
-    padding-top: 64px;
+
+   
     padding-bottom: 30px;
   }
   
@@ -98,8 +99,9 @@
   
   .title-hero-text {
     font-family: 'Ermilov';
+ 
     width: 318px;
- padding: 0 14px;
+ padding-top: 164px;
     position: relative; /* Поверх затемнения */
     text-shadow: 0 0 77px rgba(0, 0, 0, 0.55);
     z-index: 1;
@@ -114,6 +116,7 @@ background-clip: text;
 
   .subtitle-hero-text {
     font-family:'Codec Pro';
+    text-align: center;
   margin: 300px auto 78px;
 line-height: 115%;
 text-transform: uppercase;
@@ -313,9 +316,7 @@ color: black;
        
       }
 
-      .titles-hero {
-        margin: 400px auto 15px;
-      }
+     
       
       .title-hero-text {
         
