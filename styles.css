@@ -287,8 +287,10 @@ padding: 25px 0;
 
 /* --------------------------------------СЕКЦИЯ ПЕРЕВАГИ----------------------------------- */
 
+
+
 .section-perevagi {
-  padding: 25px 0;
+  padding: 25px 0 50px 0;
 }
 .perevagi-wrapper {
   display: flex;
@@ -371,6 +373,38 @@ padding: 25px 0;
 
 
 /* --------------------------------------///СЕКЦИЯ ПЕРЕВАГИ----------------------------------- */
+
+/* -------------------------------------СПІВПРАЦЯ----------------------------------------------- */
+
+.section-spivpracia {
+  position: relative;
+  overflow: hidden;
+  background-color: black;
+}
+.mustang-box {
+  width: 390px;
+  height: 924px;
+}
+
+.mustang-picture {
+  position: absolute;
+  right: -5%;
+  bottom: 14%;
+height: 70%;
+}
+
+.light {
+  border-radius: 0px;
+fill: linear-gradient(182deg, #fff 0%, rgba(255, 255, 255, 0.33) 36%, rgba(255, 255, 255, 0.05) 63.5%, rgba(255, 255, 255, 0) 100%);
+filter: blur(5.443979263305664px);
+  position: absolute;
+  right: 10px; /* Прижимаем к правому краю */
+  top: 0;
+  height: auto;
+}
+
+/* -------------------------------------///СПІВПРАЦЯ----------------------------------------------- */
+
 
   /* Планшеты + нетбуки */
   @media screen and (min-width: 1080px) {
