@@ -313,305 +313,39 @@
 
 <!-- УСЛУГИ -->
 <script>
-   document.addEventListener('DOMContentLoaded', () => {
-    const trackWrapper = document.querySelector('.perevagi-track');
-    if (!trackWrapper) {
-        console.error('Slider track .perevagi-track not found! Slider cannot initialize.');
-        return;
-    }
-
-    const originalCardsQuery = trackWrapper.querySelectorAll('.perevagi-card:not(.clone)');
-    if (originalCardsQuery.length === 0) {
-        console.warn('No original cards found in .perevagi-track. Slider not initialized or no content.');
-        const prevButton = document.getElementById('prevBtn');
-        const nextButton = document.getElementById('nextBtn');
-        if (prevButton) prevButton.style.display = 'none';
-        if (nextButton) nextButton.style.display = 'none';
-        return;
-    }
-
-    let actualCards = Array.from(originalCardsQuery); // Массив оригинальных карточек
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-
-    let currentIndex = 0; // Индекс текущего слайда в треке (0=клон последней, 1=первая реальная, и т.д.)
-    let cardFullWidth = 0;
-    const CARD_MARGIN_RIGHT = 10; // Из вашего CSS: .perevagi-card { margin-right: 10px; }
-    const ANIMATION_DURATION = 400; // Из вашего CSS: transition: transform 0.4s ease;
-
-    let isTransitioning = false; // Флаг: идет ли анимация или "прыжок"
-    let isDraggingGlobal = false; // Флаг: идет ли перетаскивание (тач или мышь)
-
-    function calculateCardWidth() {
-        if (actualCards.length > 0) {
-            const firstCardOffsetWidth = actualCards[0].offsetWidth;
-            if (firstCardOffsetWidth === 0) {
-                console.warn('calculateCardWidth: actualCards[0].offsetWidth is 0. Card may be hidden or not rendered. Slider might not work.');
-            }
-            cardFullWidth = firstCardOffsetWidth + CARD_MARGIN_RIGHT;
-            console.log(`Calculated cardFullWidth: ${firstCardOffsetWidth} (offsetWidth) + ${CARD_MARGIN_RIGHT} (margin) = ${cardFullWidth}`);
+    document.addEventListener('DOMContentLoaded', () => {
+      const track = document.querySelector('.perevagi-track');
+      const cards = document.querySelectorAll('.perevagi-card');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+  
+      let currentIndex = 0;
+      const cardWidth = cards[0].offsetWidth + 10; // Ширина карточки + margin-right
+      const totalCards = cards.length;
+  
+      function updateSliderPosition() {
+        const offset = -(cardWidth * currentIndex);
+        track.style.transform = `translateX(${offset}px)`;
+      }
+  
+      nextBtn.addEventListener('click', () => {
+        if (currentIndex < totalCards - 1) {
+          currentIndex++;
         } else {
-            cardFullWidth = 0;
-            console.error('calculateCardWidth: actualCards.length is 0, cardFullWidth set to 0. This should not happen if originalCardsQuery found cards.');
+          currentIndex = 0; // Зацикливаем
         }
-    }
-
-    function updateSlider(animate = true) {
-        if (animate && isTransitioning) {
-            console.log('UpdateSlider (animate=true): transition is already in progress, update request skipped.');
-            return;
-        }
-        // Если animate=false, это может быть прыжок или начальная установка, разрешаем.
-        // isTransitioning может быть true во время прыжка, но animate будет false.
-        if (!animate && isTransitioning) {
-            console.log('UpdateSlider (animate=false): called during transition (likely a jump), proceeding.');
-        }
-
-        if (cardFullWidth === 0 && actualCards.length > 0) {
-            console.warn("updateSlider: cardFullWidth is 0, attempting to recalculate.");
-            calculateCardWidth(); // Попытка пересчитать, если не было сделано
-        }
-        if (cardFullWidth === 0 && actualCards.length > 0) { // Проверяем снова
-            console.error("UpdateSlider: Card full width is STILL 0. Cannot apply transform.");
-            return;
-        }
-
-        const offset = -currentIndex * cardFullWidth;
-        console.log(`UpdateSlider: Setting transform. currentIndex=${currentIndex}, offset=${offset}px, animate=${animate}`);
-
-        if (animate) {
-            trackWrapper.style.transition = `transform ${ANIMATION_DURATION}ms ease`;
+        updateSliderPosition();
+      });
+  
+      prevBtn.addEventListener('click', () => {
+        if (currentIndex > 0) {
+          currentIndex--;
         } else {
-            trackWrapper.style.transition = 'none';
+          currentIndex = totalCards - 1; // Зацикливаем
         }
-        trackWrapper.style.transform = `translateX(${offset}px)`;
-    }
-
-    function setupInfiniteSlider() {
-        const numOriginalCards = actualCards.length;
-        if (numOriginalCards <= 1) {
-            currentIndex = 0; // Одна или ноль карт, нет клонов, индекс 0
-            if (prevBtn) prevBtn.style.display = 'none';
-            if (nextBtn) nextBtn.style.display = 'none';
-            console.log('setupInfiniteSlider: Not enough cards for infinite scroll. Initializing at index 0.');
-            updateSlider(false); // Установить позицию без анимации
-            return;
-        }
-
-        console.log('setupInfiniteSlider: Setting up infinite scroll for ' + numOriginalCards + ' original cards.');
-        const firstClone = actualCards[0].cloneNode(true);
-        firstClone.classList.add('clone', 'clone-first');
-        const lastClone = actualCards[numOriginalCards - 1].cloneNode(true);
-        lastClone.classList.add('clone', 'clone-last');
-
-        trackWrapper.appendChild(firstClone);
-        trackWrapper.insertBefore(lastClone, actualCards[0]);
-
-        currentIndex = 1; // Начинаем с первой реальной карточки (индекс 1, т.к. перед ней клон последней)
-        console.log('setupInfiniteSlider: Clones added. Initial currentIndex = 1.');
-        updateSlider(false); // Мгновенная установка начальной позиции
-    }
-
-    function handleTransitionEnd(event) {
-        // Убедимся, что событие пришло от trackWrapper и для свойства transform
-        if (event.target !== trackWrapper || event.propertyName !== 'transform') {
-            // console.log('handleTransitionEnd: ignored (event.target or propertyName mismatch)');
-            return;
-        }
-        console.log('handleTransitionEnd: Transition for transform ended. CurrentIndex before jump check:', currentIndex);
-
-        const numOriginalCards = actualCards.length;
-        let needsImmediateJump = false;
-
-        if (numOriginalCards > 1) { // Логика прыжков актуальна только если есть клоны
-            if (currentIndex === 0) { // Если мы на клоне последнего элемента (в начале трека)
-                console.log('handleTransitionEnd: Detected jump condition from clone-last (index 0).');
-                currentIndex = numOriginalCards; // Прыгаем на реальный последний (его индекс = кол-ву реальных карт)
-                needsImmediateJump = true;
-            } else if (currentIndex === (numOriginalCards + 1)) { // Если мы на клоне первого элемента (в конце трека)
-                console.log('handleTransitionEnd: Detected jump condition for clone-first (index ' + (numOriginalCards + 1) + ').');
-                currentIndex = 1; // Прыгаем на реальный первый (индекс 1)
-                needsImmediateJump = true;
-            }
-        }
-
-        if (needsImmediateJump) {
-            console.log(`handleTransitionEnd: Performing immediate jump to currentIndex = ${currentIndex}`);
-            // isTransitioning УЖЕ ДОЛЖЕН БЫТЬ true от действия, которое привело к этому transitionend.
-            updateSlider(false); // Мгновенный прыжок (transition: 'none')
-                                 // Этот вызов НЕ должен снова вызвать transitionend.
-            console.log('handleTransitionEnd: Jump completed. Now resetting isTransitioning.');
-            isTransitioning = false; // Сбрасываем флаг ПОСЛЕ мгновенного прыжка.
-        } else {
-            // Если это был обычный переход (не прыжок), или карточек <=1 (тогда клонов нет и прыжок не нужен)
-            console.log('handleTransitionEnd: Normal transition completed or no jump needed. Resetting isTransitioning.');
-            isTransitioning = false;
-        }
-    }
-
-    trackWrapper.addEventListener('transitionend', handleTransitionEnd);
-
-    if (nextBtn) {
-        nextBtn.addEventListener('click', () => {
-            console.log('Next btn clicked. isTransitioning:', isTransitioning, 'actualCards.length:', actualCards.length);
-            if (isTransitioning || actualCards.length <= 1) {
-                if(isTransitioning) console.log('Next btn: Action skipped, transition in progress.');
-                return;
-            }
-            isTransitioning = true; // Ставим флаг ПЕРЕД изменением индекса и анимацией
-            currentIndex++;
-            console.log('Next button. currentIndex after increment:', currentIndex);
-            updateSlider(true); // Запускаем анимацию
-        });
-    }
-
-    if (prevBtn) {
-        prevBtn.addEventListener('click', () => {
-            console.log('Prev btn clicked. isTransitioning:', isTransitioning, 'actualCards.length:', actualCards.length);
-            if (isTransitioning || actualCards.length <= 1) {
-                if(isTransitioning) console.log('Prev btn: Action skipped, transition in progress.');
-                return;
-            }
-            isTransitioning = true; // Ставим флаг ПЕРЕД изменением индекса и анимацией
-            currentIndex--;
-            console.log('Prev button. currentIndex after decrement:', currentIndex);
-            updateSlider(true); // Запускаем анимацию
-        });
-    }
-
-    let touchStartX = 0;
-    let currentTrackTranslateOnDrag = 0;
-    let dragStartTrackTranslate = 0;
-
-    function onDragStart(clientX) {
-        console.log('onDragStart. isTransitioning:', isTransitioning, 'actualCards.length:', actualCards.length);
-        if (isTransitioning || actualCards.length <= 1) { // Не начинаем новый драг, если уже идет анимация
-            if(isTransitioning) console.log('onDragStart: Action skipped, transition in progress.');
-            return;
-        }
-        isDraggingGlobal = true;
-        touchStartX = clientX;
-        if (cardFullWidth === 0) calculateCardWidth(); // На всякий случай
-        
-        dragStartTrackTranslate = -currentIndex * cardFullWidth; // Текущее смещение трека
-        trackWrapper.style.transition = 'none'; // Отключаем CSS-анимацию на время перетаскивания
-        console.log(`onDragStart: touchStartX=${touchStartX}, currentIndex=${currentIndex}, dragStartTrackTranslate=${dragStartTrackTranslate}`);
-    }
-
-    function onDragMove(clientX) {
-        if (!isDraggingGlobal || actualCards.length <= 1) return; // Не двигаем, если не тащим или нет смысла
-        // Не проверяем isTransitioning здесь, так как драг мог начаться до того, как isTransitioning стал true от кнопки
-        const deltaX = clientX - touchStartX;
-        currentTrackTranslateOnDrag = dragStartTrackTranslate + deltaX;
-        trackWrapper.style.transform = `translateX(${currentTrackTranslateOnDrag}px)`;
-    }
-
-    function onDragEnd() {
-        console.log('onDragEnd. isDraggingGlobal:', isDraggingGlobal, 'isTransitioning (before this action):', isTransitioning);
-        if (!isDraggingGlobal || actualCards.length <= 1) {
-            if(isDraggingGlobal) isDraggingGlobal = false; // Если прервано, сбросить флаг
-            return;
-        }
-        isDraggingGlobal = false; // Завершили перетаскивание
-
-        // Если уже идет анимация от кнопки, и пользователь закончил свайп,
-        // то лучше просто вернуть на место, куда шла анимация.
-        // Но если isTransitioning еще false, то мы его сейчас поставим.
-        if (isTransitioning) {
-            console.log('onDragEnd: Transition was already in progress from another source (e.g. button), reverting drag and letting existing transition finish.');
-            // Плавно вернуть на тот слайд, куда уже шла анимация (текущий currentIndex)
-            updateSlider(true); 
-            return;
-        }
-        
-        isTransitioning = true; // Ставим флаг, так как НАЧИНАЕМ анимацию по результату свайпа
-
-        const movedBy = currentTrackTranslateOnDrag - dragStartTrackTranslate;
-        // Порог может быть немного меньше для лучшей отзывчивости на тач
-        const threshold = cardFullWidth * 0.20; 
-
-        console.log(`onDragEnd: movedBy=${movedBy}, threshold=${threshold}`);
-
-        if (movedBy < -threshold) { // Свайп влево (показываем следующую карточку)
-            console.log('onDragEnd: Swipe determined as LEFT (next slide).');
-            currentIndex++;
-        } else if (movedBy > threshold) { // Свайп вправо (показываем предыдущую карточку)
-            console.log('onDragEnd: Swipe determined as RIGHT (previous slide).');
-            currentIndex--;
-        } else {
-            console.log('onDragEnd: Swipe distance not enough, reverting to current slide.');
-            // currentIndex не меняется, просто анимируем обратно на текущую позицию
-        }
-        console.log('onDragEnd: New target currentIndex for updateSlider:', currentIndex);
-        updateSlider(true); // Анимируем к новому (или текущему, если свайп был коротким) currentIndex
-    }
-
-    // Touch события
-    trackWrapper.addEventListener('touchstart', (e) => onDragStart(e.touches[0].clientX), { passive: true });
-    trackWrapper.addEventListener('touchmove', (e) => {
-        if (isDraggingGlobal) {
-            // Если нужно предотвратить вертикальный скролл страницы во время горизонтального свайпа:
-            // e.preventDefault(); // Тогда { passive: false } для touchstart и touchmove
-            onDragMove(e.touches[0].clientX);
-        }
-    }, { passive: true }); // passive: true если не используется preventDefault
-    trackWrapper.addEventListener('touchend', onDragEnd);
-    trackWrapper.addEventListener('touchcancel', onDragEnd); // Если система отменила тач
-
-    // Mouse события (для десктопа и отладки)
-    let mouseIsDown = false;
-    trackWrapper.addEventListener('mousedown', (e) => {
-        mouseIsDown = true;
-        onDragStart(e.clientX);
-        e.preventDefault(); // Предотвращаем выделение текста и стандартное поведение drag для изображений
+        updateSliderPosition();
+      });
     });
-    document.addEventListener('mousemove', (e) => { // Слушаем на всем документе
-        if (!mouseIsDown) return;
-        onDragMove(e.clientX);
-    });
-    document.addEventListener('mouseup', (e) => { // Слушаем на всем документе
-        if (!mouseIsDown) return;
-        mouseIsDown = false;
-        onDragEnd();
-    });
-     document.addEventListener('mouseleave', (e) => { // Если мышь ушла за пределы окна браузера
-        // Проверяем, что мышь действительно покинула окно, а не просто перешла на другой элемент внутри
-        if (e.target.nodeName === 'HTML' && !e.relatedTarget) { 
-            if (!mouseIsDown) return;
-            mouseIsDown = false;
-            onDragEnd();
-        }
-    });
-
-    // -------- ИНИЦИАЛИЗАЦИЯ СЛАЙДЕРА --------
-    calculateCardWidth(); // 1. Сначала рассчитать ширину
-    setupInfiniteSlider();   // 2. Затем настроить клоны и начальную позицию
-
-    // Обработка изменения размера окна
-    window.addEventListener('resize', () => {
-        console.log('Window resize detected.');
-        // Если идет анимация, ее нужно "завершить" мгновенно
-        // trackWrapper.style.transition = 'none'; // Прерываем любую текущую анимацию
-        // isTransitioning = false; // Сбрасываем флаг, так как анимация прервана
-
-        calculateCardWidth();
-        // currentIndex уже должен быть корректным (реальный слайд или клон)
-        // Мы должны просто обновить позицию без анимации.
-        // Если в этот момент currentIndex указывал на клон, то он так и останется.
-        // Прыжок на реальный слайд произойдет только после следующего transitionend от действия пользователя.
-        // Это может быть проблемой, если ресайз произошел точно в момент анимации на клон.
-        // Более сложная логика: завершить анимацию, вызвать handleTransitionEnd, затем ресайз.
-        // Пока оставим проще:
-        let oldTransition = trackWrapper.style.transition;
-        trackWrapper.style.transition = 'none';
-        isTransitioning = false; // Предполагаем, что ресайз "отменяет" текущее состояние
-
-        updateSlider(false); // Обновление позиции без анимации
-
-        // Попытка восстановить transition не нужна, он установится при следующем user action
-        console.log('Resize: slider position updated.');
-    });
-});
   </script>
   
   
