@@ -79,7 +79,7 @@
    .hero-section {
     position: relative;
     background-image: url('./img/hero-image-mobile.webp');
-    background-size: contain;
+    background-size: cover;
     background-position: center;
   
     padding-top: 64px;
@@ -142,6 +142,13 @@ color: black;
   }
     /* ----------------------------///HERO-------------------------------- */
    
+.test-div {
+  height: 500px;
+  background-color: #d18b01;
+}
+
+
+
   /* Скрытые элементы */
   .nav-desktop-list {
     display: none;
