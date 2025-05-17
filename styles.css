@@ -134,15 +134,26 @@ text-shadow: 0 0 77px rgba(0, 0, 0, 0.33);
     padding: 20px 40px;
     width: 285px;
     
-    background-color: #efa201;
+    background-color:  #ffb61d;
     margin: 0 auto;
-
+    position: relative; /* Поверх затемнения */
 font-weight: 600;
 font-size: 18px;
 line-height: 100%;
 text-align: center;
 color: black;
+transition: background-color 0.3s ease;
   }
+
+  .consultation-button:hover,
+.consultation-button:focus,
+.consultation-button:active {
+  background-color: #efa201;
+}
+
+
+
+
     /* ----------------------------///HERO-------------------------------- */
    
 
@@ -509,10 +520,9 @@ color:white;
 }
 
 .spivpracia-consultacia-btn {
+  display: block;
   border-radius: 5px;
 padding: 13px 26px;
-width: 338px;
-height: 55px;
 background: #efa201;
 
 
@@ -589,6 +599,7 @@ color: black;
 }
 
 .tarifi-btn {
+display: block;
 font-weight: 600;
 font-size: 16px;
 line-height: 100%;
@@ -597,8 +608,7 @@ text-align: center;
 color: black;
   border-radius: 4px;
 padding: 19px 37px;
-width: 338px;
-height: 55px;
+
 background: #efa201;
 margin-top: 20px;
 }
