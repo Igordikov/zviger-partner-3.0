@@ -618,7 +618,7 @@
           </defs>
         </svg>
         <div class="footer-lang">
-         <span class="ukr">Україна</span>  <span class="usa">США</span>
+         <button class="ukr">Україна</button> <button class="usa">США</button>
         </div>
         <h2 class="footer-subtitle">Контакти</h2>
 
@@ -863,6 +863,21 @@
             }
         });
     });
+</script>
+
+<!-- Кнопки языковой версии -->
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const buttons = document.querySelectorAll(".footer-lang button");
+
+    buttons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        buttons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+      });
+    });
+  });
 </script>
 
 <!-- -----------------------------------------------------///ФОРМА-------------------------------------- -->

@@ -774,12 +774,11 @@ background: black;
 }
 
 .footer-lang {
-display: flex;
-gap: 10px;
-
+  display: flex;
+  gap: 10px;
 }
 
-.ukr {
+.footer-lang button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -787,29 +786,25 @@ gap: 10px;
   border-radius: 53px;
   width: 115px;
   height: 35px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 120%;
+  transition: all 0.3s ease;
+}
+
+/* Сброс начальных цветов */
+.footer-lang button:not(.active) {
+  background: transparent;
+  border: 0.89px solid #efa201;
+  color: white;
+}
+
+/* Активная кнопка */
+.footer-lang button.active {
   background: #efa201;
   border: 0.89px solid #efa201;
-  font-family: var(--font-family);
-font-weight: 400;
-font-size: 17px;
-line-height: 120%;
-color: black;
-}
-
-.usa {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  border-radius: 53px;
-  width: 115px;
-  height: 35px;
-  border: 0.89px solid #efa201;
-  font-family: var(--font-family);
-font-weight: 400;
-font-size: 17px;
-line-height: 120%;
-color: white;
+  color: black;
 }
 
 .footer-subtitle {
