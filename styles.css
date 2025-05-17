@@ -606,7 +606,8 @@ margin-top: 20px;
 /* -----------------------------СЕКЦИЯ ПРО CRM------------------------------------------------- */
 
 .section-crm {
-  padding: 15px 0;
+  padding-top: 15px;
+  padding-bottom: 64px;
 }
 
 .subtitle-crm {
@@ -638,6 +639,7 @@ margin-top: 20px;
   border-radius: 8px;
 padding: 30px;
 background: #f9f2e5;
+margin-bottom: 20px;
 }
 
 .number-crm {
@@ -654,10 +656,106 @@ font-weight: 700;
 font-size: 16px;
 line-height: 140%;
 color: black;
+}
 
+.crm-btn {
+  border-radius: 8px;
+width: 338px;
+height: 55px;
+background: #efa201;
+font-weight: 600;
+font-size: 16px;
+line-height: 100%;
+text-align: center;
+color: black;
+display: block;
+margin: 0 auto;
 }
 
 /* -----------------------------///СЕКЦИЯ ПРО CRM------------------------------------------------- */
+
+/* ------------------------------------ФОРМА ЗАЯВКИ------------------------------------------------- */
+
+.section-form {
+  padding-top: 120px;
+  padding-bottom: 120px;
+ height: 927px;
+ background: #efa201;
+
+}
+
+.title-form {
+margin-bottom: 12px;
+font-weight: 700;
+font-size: 32px;
+line-height: 110%;
+color: black;
+}
+
+.form-dscr {
+  margin-bottom: 40px;
+font-weight: 400;
+font-size: 16px;
+line-height: 120%;
+color: black;
+}
+
+
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+}
+
+
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+ 
+}
+
+.phone-input-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+input {
+  border-radius: 12px;
+padding: 32px 24px;
+max-height: 93px;
+background: white;
+border: none;
+}
+
+.country-flag {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.form-brn {
+  border-radius: 12px;
+  padding: 32px;
+  width: 326px;
+  height: 93px;
+  background: black;
+margin: 0 auto;
+font-weight: 600;
+font-size: 24px;
+line-height: 100%;
+text-align: center;
+color: white;
+}
+
+
+/* ------------------------------------///ФОРМА ЗАЯВКИ------------------------------------------------- */
+
+
 
 /* ---------------------------------------///ТАРИФЫ------------------------------------------------- */
 

@@ -540,16 +540,63 @@
         <span class="number-crm">07</span>
         <div class="crm-text-box"><p>Кастомізований доступ — налаштування прав для співробітників та партнерів.</p></div>
       </div>
-    
     </div>
 
-   
-
+   <p class="description-crm">Для дилерів авто, які працюють із великими обсягами авто та цінують у власній роботі контроль, швидкість і зручність.</p>
+<button class="crm-btn">Дізнатися більше про CRM</button>
   </div>
 </section>
 
-
 <!-- -----------------------------------------///СЕКЦИЯ ПРО CRM------------------------------------------------------ -->
+
+
+<!-- --------------------------------------------СЕКЦИЯ ФОРМА ЗАЯВКИ------------------------------------- -->
+
+<section class="section-form">
+ 
+  <div class="container">
+      <h2 class="title-form">Потрібна допомога з підбором авто?</h2>
+      <p class="form-dscr">Залиште заявку і наш менеджер допоможе вам</p>
+        <form action="/submit-application" method="POST" id="applicationForm" novalidate>
+            
+            <div class="form-group">
+                <label for="userName">Ваше ім'я <span class="required-star" aria-hidden="true">*</span><span class="visually-hidden">(обов'язково)</span></label>
+                <input type="text" id="userName" name="userName" placeholder="Іван Іванов" required autocomplete="name" aria-describedby="userNameError">
+                <div class="error-message" id="userNameError" role="alert"></div>
+            </div>
+
+            <div class="form-group">
+              <div class="phone-input-group">
+                <label for="userPhone">Телефон <span class="required-star" aria-hidden="true">*</span><span class="visually-hidden">(обов'язково)</span></label>
+                    <span class="country-flag" aria-hidden="true">
+                    <img src="./img/UA.png" alt="" width="36" height="24">
+                 </span> 
+                </div>
+                    <input type="tel" id="userPhone" name="userPhone" placeholder="+380 (XX) XXX-XX-XX" required pattern="\+380\s?\(?\d{2}\)?\s?\d{3}-?\d{2}-?\d{2}" title="Введіть номер у форматі +380 (XX) XXX-XX-XX" autocomplete="tel" aria-describedby="userPhoneError">
+                <div class="error-message" id="userPhoneError" role="alert"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="userEmail">Email <span class="required-star" aria-hidden="true">*</span><span class="visually-hidden">(обов'язково)</span></label>
+                <input type="email" id="userEmail" name="userEmail" placeholder="example@mail.com" required autocomplete="email" aria-describedby="userEmailError">
+                <div class="error-message" id="userEmailError" role="alert"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="userCompany">Компанія</label>
+                <input type="text" id="userCompany" name="userCompany" placeholder="Назва вашої компанії" autocomplete="organization" aria-describedby="userCompanyError">
+                <div class="error-message" id="userCompanyError" role="alert"></div> <!-- Залишено для можливих майбутніх валідацій -->
+            </div>
+
+            <button class="form-brn" type="submit" class="submit-button">Відправити заявку</button>
+
+        </form>
+    </div>
+
+</section>
+
+<!-- --------------------------------------------///СЕКЦИЯ ФОРМА ЗАЯВКИ------------------------------------- -->
+
 
 <!-- -----------------------------------------SCRIPT------------------------------------------ -->
 
@@ -615,7 +662,111 @@
   </script>
   
   
-  
+  <!-- ---------------------------------------ФОРМА----------------------------------------- -->
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.getElementById('applicationForm');
+        const userNameInput = document.getElementById('userName');
+        const userPhoneInput = document.getElementById('userPhone');
+        const userEmailInput = document.getElementById('userEmail');
+        const userCompanyInput = document.getElementById('userCompany'); // Навіть якщо не валідується, може знадобитись для очищення
+
+        // Список інпутів, які потрібно валідувати та очищати помилки при введенні
+        const inputsToValidate = [userNameInput, userPhoneInput, userEmailInput]; 
+
+        form.addEventListener('submit', function (event) {
+            clearAllErrors(); // Очищаємо всі попередні помилки
+            let isValid = true;
+
+            // 1. Валідація імені
+            if (userNameInput.value.trim() === '') {
+                showError(userNameInput, 'userNameError', 'Будь ласка, введіть ваше ім\'я.');
+                isValid = false;
+            } else if (userNameInput.value.trim().length < 2) {
+                showError(userNameInput, 'userNameError', 'Ім\'я повинно містити щонайменше 2 символи.');
+                isValid = false;
+            }
+
+            // 2. Валідація телефону
+            const phonePattern = /^\+380\s?\(?\d{2}\)?\s?\d{3}-?\d{2}-?\d{2}$/;
+            if (userPhoneInput.value.trim() === '') {
+                showError(userPhoneInput, 'userPhoneError', 'Будь ласка, введіть ваш номер телефону.');
+                isValid = false;
+            } else if (!phonePattern.test(userPhoneInput.value.trim())) {
+                showError(userPhoneInput, 'userPhoneError', 'Невірний формат номера. Очікується +380 (XX) XXX-XX-XX.');
+                isValid = false;
+            }
+
+            // 3. Валідація Email
+            // Простий патерн, для більш суворої валідації можна використати складніший
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
+            if (userEmailInput.value.trim() === '') {
+                showError(userEmailInput, 'userEmailError', 'Будь ласка, введіть ваш email.');
+                isValid = false;
+            } else if (!emailPattern.test(userEmailInput.value.trim().toLowerCase())) { // .toLowerCase() для email
+                showError(userEmailInput, 'userEmailError', 'Невірний формат email. Очікується example@mail.com.');
+                isValid = false;
+            }
+            
+            // 4. Валідація Компанії (приклад, якщо поле стане обов'язковим або матиме правила)
+            // if (userCompanyInput.value.trim() === '' && userCompanyInput.hasAttribute('required')) {
+            //     showError(userCompanyInput, 'userCompanyError', 'Будь ласка, введіть назву компанії.');
+            //     isValid = false;
+            // }
+
+            if (!isValid) {
+                event.preventDefault(); // Зупиняємо відправку форми, якщо є помилки
+                // Фокус на першому полі з помилкою для кращого UX
+                const firstInvalidField = form.querySelector('.is-invalid');
+                if (firstInvalidField) {
+                    firstInvalidField.focus();
+                }
+            }
+            // Якщо isValid = true, форма відправиться стандартно (або AJAX, якщо ви його реалізуєте)
+        });
+
+        function showError(inputElement, errorElementId, message) {
+            const errorElement = document.getElementById(errorElementId);
+            if (inputElement) inputElement.classList.add('is-invalid');
+            if (errorElement) {
+                errorElement.textContent = message;
+                errorElement.style.display = 'block';
+            }
+        }
+
+        function clearError(inputElement, errorElementId) {
+            const errorElement = document.getElementById(errorElementId);
+            if (inputElement) inputElement.classList.remove('is-invalid');
+            if (errorElement) {
+                errorElement.textContent = '';
+                errorElement.style.display = 'none';
+            }
+        }
+        
+        function clearAllErrors() {
+            clearError(userNameInput, 'userNameError');
+            clearError(userPhoneInput, 'userPhoneError');
+            clearError(userEmailInput, 'userEmailError');
+            clearError(userCompanyInput, 'userCompanyError'); // Очищаємо, навіть якщо не було валідації
+        }
+
+        // Додатково: очищення помилки при введенні даних (покращує UX)
+        inputsToValidate.forEach(input => {
+            if (input) { // Перевірка, чи елемент існує
+                input.addEventListener('input', function() {
+                    // Визначаємо ID елемента помилки на основі ID інпута
+                    const errorId = this.id + 'Error'; 
+                    if (this.classList.contains('is-invalid')) {
+                         clearError(this, errorId);
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+<!-- -----------------------------------------------------///ФОРМА-------------------------------------- -->
 
 </body>
 </html>
