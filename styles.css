@@ -98,8 +98,8 @@
   }
   
   .title-hero-text {
+    position: relative;
     font-family: 'Ermilov';
- 
     width: 318px;
  padding-top: 164px;
     position: relative; /* Поверх затемнения */
@@ -114,7 +114,13 @@ background: linear-gradient(270deg, #efa201 0%, #ffb61d 100%);
 background-clip: text;
   }
 
+  .subtitle-hero-text-desktop {
+    display: none;
+
+  }
+
   .subtitle-hero-text {
+    position: relative;
     font-family:'Codec Pro';
     text-align: center;
   margin: 300px auto 78px;
@@ -1083,6 +1089,7 @@ color: #d8d8d8;
     
 
     .subtitle-hero-text-desktop {
+      display: block;
       position: relative;
       font-family: var(--third-family);
       font-weight: 500;
