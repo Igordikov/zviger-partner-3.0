@@ -897,8 +897,10 @@ color: #d8d8d8;
 
 /* ---------------------------------------///ТАРИФЫ-ПЛАНШЕТ------------------------------------------------- */
 
+
+
   /* Планшеты + нетбуки */
-  @media screen and (min-width: 1080px) {
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
     .container {
       max-width: 90%;
       padding: 0 32px;
@@ -1004,11 +1006,13 @@ color: #d8d8d8;
 
 
   
-  /* Десктопы */
-  @media screen and (min-width: 1441px) {
+ /* -----------------------------------------------ДЕСКТОПЫ------------------------------------------ */
+  @media screen and (min-width: 1200px) {
     .container {
+      min-width:1024 ;
       max-width: 1680px;
-      padding: 0 93px;
+      padding: 0 120px;
+      margin: 0 auto;
     }
 
        
@@ -1026,51 +1030,89 @@ color: #d8d8d8;
      
 
    
-    /* --------------------------------HERO------------------------------ */
+    /* --------------------------------ДЕСКТОП HERO------------------------------ */
+
+    .burger {
+      display: none;
+    }
 
     .hero-section {
-        background-image: url('./img/hero-image-desktop.webp'); /* Укажите путь к изображению */
-        background-size: cover; /* Масштабирование */
-        background-position: center; /* Центрирование */
-       height: 1030px;
-       
-      }
+      background-image: url('./img/hero-image-desktop.webp');
+      background-size: cover;         /* Растянуть фон */
+      background-repeat: no-repeat;
+      background-position: center;
+      height: 1030px;
+      width: 100vw;                   /* Вся ширина окна */
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-section .container {
+      width: 100%;
+      max-width: 100%;
+      padding: 0 20px; /* чтобы контент не прилипал к краям */
+      margin: 0 auto;
+    }
+    
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 15px;
+  margin-top: 500px;
+    }
 
      
       
-      .title-hero-text {
-        
-        width: 1734px;
-        font-weight: 700;
-        font-size: 80px;
-        line-height: 115%;
-        text-transform: uppercase;
-        text-align: center;
-        background: linear-gradient(270deg, #efa201 0%, #ffb61d 100%);
-        background-clip: text;
-        
-      }
-
-      .subtitle-hero-text-mobile {
-        display: none !important; /* Принудительное скрытие */
+    .title-hero-text {
+      position: relative;
+      width: 100%; /* или auto */
+      max-width: 100%;
+      padding: 0 20px;
+      box-sizing: border-box;
+      font-weight: 700;
+      font-size: 80px;
+      line-height: 115%;
+      text-transform: uppercase;
+      text-align: center;
+      background: linear-gradient(270deg, #efa201 0%, #ffb61d 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
     }
     
 
+    .subtitle-hero-text-desktop {
+      position: relative;
+      font-family: var(--third-family);
+      font-weight: 500;
+      font-size: 32px;
+      line-height: 115%;
+      text-transform: uppercase;
+      text-align: center;
+      color: var(--gray);
+      text-shadow: 0 0 77px 0 rgba(0, 0, 0, 0.33);
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+    
+.subtitle-hero-text {
+  display: none;
+}
+   
+    
 
-      .subtitle-hero-text-desktop {
-          display: block;
-          width: 1239px;
-          font-weight: 700;
-          font-size: 32px;
-          line-height: 115%;
-          text-transform: uppercase;
-          text-align: center;
-          margin-top: 20px;
+
+
+        .consultation-button {
+          margin: 0 auto;
         }
      
-        /* --------------------------------HERO------------------------------ */
+        /* --------------------------------///ДЕСКТОП HERO------------------------------ */
   
   }
+
+   /* -----------------------------------------------///ДЕСКТОПЫ------------------------------------------ */
 
   
     /* -------------------------------------------------------///АДАПТИВКА----------------------------------------------------------- */
