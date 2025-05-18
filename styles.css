@@ -1,4 +1,5 @@
- 
+ /* -------------------------ШРИФТЫ-------------------------- */
+
 @font-face {
     font-family: 'Ermilov';
     src: url('./fonts/ermilov/Ermilov-bold.woff2') format('woff2'),
@@ -16,13 +17,11 @@
     font-weight: normal;
     font-style: normal;
 }
-
+/* -------------------------///ШРИФТЫ-------------------------- */
   
  
- /* -------------------------------------------------------АДАПТИВКА----------------------------------------------------------- */
+ /* --------------------------АДАПТИВКА------------------------ */
  
-
-  
   /* Мобильные устройства */
 
     .container {
@@ -58,9 +57,8 @@
          justify-content: space-between;
        }
      
-      
     /* ------------------------------burger--------------------- */
-  /* CSS */
+
 .burger {
     display: flex;
     align-items: center;
@@ -72,8 +70,6 @@
     background: #efa201;
   }
 
-
-  
    /* ------------------------------///burger--------------------- */
 
    /* ----------------------------HERO-------------------------------- */
@@ -114,10 +110,6 @@ background: linear-gradient(270deg, #efa201 0%, #ffb61d 100%);
 background-clip: text;
   }
 
-  .subtitle-hero-text-desktop {
-    display: none;
-
-  }
 
   .subtitle-hero-text {
     position: relative;
@@ -157,11 +149,8 @@ transition: background-color 0.3s ease;
   background-color: #efa201;
 }
 
+/* ----------------------------///HERO-------------------------------- */
 
-
-
-    /* ----------------------------///HERO-------------------------------- */
-   
 
   /* Скрытые элементы */
   .nav-desktop-list {
@@ -179,6 +168,11 @@ transition: background-color 0.3s ease;
 
   .feedback-button {
     display: none;
+  }
+
+  .subtitle-hero-text-desktop {
+    display: none;
+
   }
 
   /* ---------------------------------СЕКЦИЯ УСЛУГИ------------------------------- */
@@ -211,7 +205,7 @@ transition: background-color 0.3s ease;
   align-items: center;
   border-radius: 8px;
 padding: 10px 23px;
-width: 300px;
+width: 320px;
 height: 75px;
 background-color: #efa201;
 
@@ -223,6 +217,9 @@ font-weight: 500;
 font-size: 15px;
 line-height: 120%;
 color: #000;
+cursor: pointer;
+transition: border-radius 0.3s;
+
 
 }
 
@@ -231,7 +228,7 @@ color: #000;
   overflow: hidden;
   transition: max-height 0.4s ease, padding 0.4s ease;
   padding: 0 20px; /* добавим боковые отступы сразу */
- 
+width: 320px;
   border-radius: 0 0 8px 8px;
   color: #333;
   font-size: 14px;
@@ -243,12 +240,6 @@ color: #000;
   padding: 10px 20px;
   background-color: #f9f2e5;
 }
-.service-card {
-  cursor: pointer;
-  transition: border-radius 0.3s;
-  width: 320px;
-}
-
 .service-wrapper.expanded .service-card {
   border-radius: 8px 8px 0 0;
   background-color:#d18b01;
@@ -267,15 +258,25 @@ color: #000;
   cursor: pointer;
 }
 
+
 .service-wrapper.expanded .service-card::after {
   content: "–";
 }
 
+/* ---------------------------------///СЕКЦИЯ УСЛУГИ------------------------------- */
 
-  /* ---------------------------------///СЕКЦИЯ УСЛУГИ------------------------------- */
 
 
 /* ------------------------------------СЕКЦИЯ О НАС-------------------------------------- */
+
+.subtitle-text-o-nas {
+  font-family: var(--second-family);
+font-weight: 700;
+font-size: 32px;
+line-height: 110%;
+color: var(--black);
+}
+
 .section-o-nas {
 padding: 25px 0;
 }
@@ -283,7 +284,7 @@ padding: 25px 0;
 .o-nas-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+ gap: 40px;
 }
 
 .o-nas-picture {
@@ -291,8 +292,6 @@ padding: 25px 0;
 }
 
 .o-nas-dscr{
- 
-  
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -313,7 +312,15 @@ padding: 25px 0;
   display: flex;
   flex-direction: column;
   gap: 15px;
-  align-items: center;
+
+}
+
+.subtitle-perevagi {
+  font-family: var(--second-family);
+font-weight: 700;
+font-size: 32px;
+line-height: 120%;
+color: var(--black);
 }
 
 .perevagi-slider {
@@ -351,12 +358,6 @@ padding: 25px 0;
   flex-shrink: 0;
 }
 
-/* Убираем отступ у последнего элемента в ОРИГИНАЛЬНОМ наборе и у последнего клона. */
-/* Это нужно будет делать аккуратно, так как клоны добавляются. */
-/* Проще всего не убирать margin-right и принять, что после последней карточки будет отступ, */
-/* либо делать это в JS при клонировании или стилизовать клоны отдельно. */
-/* Пока оставим margin-right: 10px для всех, включая клоны, для простоты расчета cardWidth */
-
 .perevagi-card-text {
   width: 85%; /* Это может быть причиной проблем с паддингами, если текст слишком длинный */
   font-weight: 400;
@@ -386,8 +387,19 @@ padding: 25px 0;
                      /* Лучше выравнивать кнопки относительно самого слайдера */
 }
 
+.perevagi-crm-card {
+  background: var(--efa201);
+  color: black;
+}
 
-
+.perevagi-crm-btn {
+  padding: 14px 16px;
+background: var(--black);
+text-align: center;
+color: var(--white);
+font-size: 16px;
+  border-radius: 12px;
+}
 
 /* --------------------------------------///СЕКЦИЯ ПЕРЕВАГИ----------------------------------- */
 
@@ -905,114 +917,9 @@ color: #d8d8d8;
 
 
 
-  /* Планшеты + нетбуки */
-  @media screen and (min-width: 768px) and (max-width: 1023px) {
-    .container {
-      max-width: 90%;
-      padding: 0 32px;
-    }
-
-    .burger {
-        display: none;
-       }
-      
-    
-       .nav-desktop-container {
-        display: flex;
-       }
-
-       .nav-desktop-list {
-        display: flex;
-        gap: 15px; 
-      }
-    
-      .nav-desktop-item {
-        position: relative; /* Теперь позиция будет определяться внутри элемента */
-        
-        font-weight: 500;
-        font-size: 12px;
-        line-height: 90%;
-    
-      }
-    
-      .underline {
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        width: 0;
-        height: 2px;
-        background-color: #000;
-        transition: width 0.3s ease-in-out;
-    }
-    
-    .nav-desktop-item:hover .underline,
-    .nav-desktop-item.active .underline {
-        width: 100%;
-    }
-    
-    .nav-tel-number a {
-      display: inline-block;
-      transition: text-shadow 0.3s ease-in-out;
-    }
-    
-    .nav-tel-number a:hover {
-      text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
-    }
-    
-    
-      .language-switcher {
-        border: 1px solid #dbd3c2;
-        border-radius: 4px;
-        padding: 10px;
-        display: flex;
-        gap: 7px;
-        align-items: center;
-        justify-content: space-between;
-        cursor: pointer;
-        background-color: #fff;
-        position: relative;
-        font-family: "Roboto", sans-serif;
-        font-weight: 600;
-        font-size: 14px;
-        line-height: 1;
-        color: #000;
-        margin-left: 20px;
-    }
-    
-    .language-switcher:hover {
-        background-color: #f0f0f0;
-    }
-    
-    .feedback-button {
-      
-      display: block;
-      align-items: center;
-      background: #efa201;
-      border-radius: 5px;
-      padding: 12px 28px;
-      width: 191px;
-      height: 40px;
-      border: none;
-      color: white;
-      cursor: pointer;
-       font-family: "Roboto", sans-serif;
-      font-weight: 600;
-      font-size: 15px;
-      line-height: 1;
-      color: #000;
-      margin-left: 10px;
-    }
-    
-    .feedback-button:hover {
-      background-color: #d18b01; /* Темнее при наведении */
-    }
-
-   
-  }
-
-
+ 
   
- /* -----------------------------------------------ДЕСКТОПЫ------------------------------------------ */
+ /* -----------------------------------------------ДЕСКТОПЫ MEDIA------------------------------------------ */
   @media screen and (min-width: 1200px) {
     .container {
       min-width:1024 ;
@@ -1032,9 +939,6 @@ color: #d8d8d8;
         font-size: 16px;
         line-height: 90%;
       }
-
-     
-
    
     /* --------------------------------ДЕСКТОП HERO------------------------------ */
 
@@ -1068,9 +972,9 @@ color: #d8d8d8;
   margin-top: 500px;
     }
 
+    .title-hero-text {
      
       
-    .title-hero-text {
       position: relative;
       width: 100%; /* или auto */
       max-width: 100%;
@@ -1087,8 +991,8 @@ color: #d8d8d8;
       color: transparent;
     }
     
-
     .subtitle-hero-text-desktop {
+
       display: block;
       position: relative;
       font-family: var(--third-family);
@@ -1103,21 +1007,176 @@ color: #d8d8d8;
       margin: 0 auto;
     }
     
-.subtitle-hero-text {
+    .subtitle-hero-text {
+    display: none;
+  }
+   
+   .consultation-button {
+          margin: 0 auto;
+   }
+   
+/* --------------------------------///ДЕСКТОП HERO------------------------------ */
+
+/* -----------------------------------ДЕСКТОП УСЛУГИ----------------------------- */
+ 
+.service-section {
+  padding: 150px 0;
+}
+
+.subtitle-text {
+  font-family: var(--second-family);
+font-weight: 700;
+font-size: 86px;
+line-height: 120%;
+color: var(--black);
+margin-bottom: 50px;
+}
+
+.service-card {
+  width: 100%;
+}
+
+.service-card-text {
+  font-family: var(--font-family);
+font-weight: 500;
+font-size: 38px;
+line-height: 120%;
+color: var(--black);
+}
+
+.service-description {
+  font-family: var(--font-family);
+font-weight: 400;
+font-size: 26px;
+line-height: 120%;
+color: var(--black);
+width: 100%;
+}
+
+/* -----------------------------------///ДЕСКТОП УСЛУГИ----------------------------- */
+
+
+/* ---------------------------------ДЕСКТОП О НАС------------------------------------- */
+
+.o-nas-text {
+  font-family: var(--font-family);
+font-weight: 400;
+font-size: 32px;
+line-height: 140%;
+color: var(--black);
+}
+
+.subtitle-text-o-nas {
+  font-family: var(--second-family);
+font-weight: 700;
+font-size: 60px;
+line-height: 110%;
+color: var(--black);
+}
+
+/* ---------------------------------///ДЕСКТОП О НАС------------------------------------- */
+
+/* --------------------------------ДЕСКТОПЫ ПЕРЕВАГИ-------------------------------------- */
+
+.subtitle-perevagi {
+  font-family: var(--second-family);
+  font-weight: 700;
+  font-size: 68px;
+  line-height: 100%;
+  color: var(--black);
+}
+
+.perevagi-text {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 115%;
+  color: var(--777777);
+  margin-top: 20px;
+  margin-bottom: 66px;
+}
+
+.perevagi-slider {
+  max-width: 100%;
+  overflow: visible;
+}
+
+.perevagi-track {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 24px;
+}
+
+.perevagi-card {
+  width: auto;
+  height: auto;
+  box-sizing: border-box;
+  grid-column: span 2;
+  border-radius: 24px;
+padding: 60px 40px;
+
+}
+
+.perevagi-card:nth-last-child(-n+4) {
+  grid-column: span 3;
+}
+
+.perevagi-card svg {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 16px;
+}
+
+.perevagi-title {
+  font-family: var(--second-family);
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 120%;
+  color: var(--black);
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+.perevagi-card-text {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 140%;
+  color: var(--black);
+  margin-top: 0;
+}
+
+.arrows-box-perevagi {
   display: none;
 }
-   
-    
+
+.perevagi-crm-card {
+ display: flex;
+ flex-direction: column;
+ gap: 24px;
+
+  grid-column: span 3;
+  border-radius: 24px;
+padding: 60px 40px;
+background: var(--efa201);
+}
+
+.perevagi-crm-btn {
+  font-family: var(--font-family);
+font-weight: 600;
+font-size: 23px;
+line-height: 100%;
+text-align: center;
+color: var(--white);
+  border-radius: 12px;
+padding: 24px 32px;
+background: var(--black);
+}
 
 
+/* --------------------------------///ДЕСКТОПЫ ПЕРЕВАГИ-------------------------------------- */
 
-        .consultation-button {
-          margin: 0 auto;
-        }
-     
-        /* --------------------------------///ДЕСКТОП HERO------------------------------ */
-  
-  }
+ }   /* Закрывающая кавычка десктопа */
 
    /* -----------------------------------------------///ДЕСКТОПЫ------------------------------------------ */
 
