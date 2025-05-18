@@ -175,9 +175,13 @@ transition: background-color 0.3s ease;
 
   }
 
-  .light-desctop {
-    display: none;
-  }
+  
+
+ .desktop-light {
+  display: none;
+ }
+
+
 
   /* ---------------------------------СЕКЦИЯ УСЛУГИ------------------------------- */
   .service-section {
