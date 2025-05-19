@@ -823,7 +823,7 @@ margin: 20px auto 0;
 
 /* FULL HD тарифы */
 
-@media screen and (min-width: 1440px) {
+@media screen and (min-width: 1280px) {
 
   .section-trifi {
  padding: 140px 0;
@@ -882,9 +882,10 @@ color: var(--black);
 }
 
 .tarifi-btn {
+
   border-radius: 8px;
 padding: 42px 80px;
-
+width: 647px;
 margin: 0 auto;
 font-family: var(--font-family);
 font-weight: 600;
