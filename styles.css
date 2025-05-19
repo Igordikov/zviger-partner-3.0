@@ -421,7 +421,6 @@ font-size: 16px;
   background-color: black;
 }
 
-
 .mustang-picture {
   position: absolute;
   right: -5%;
@@ -479,7 +478,6 @@ color: white;
   display: flex;
   align-items: center;
 }
-
 
 .number-round {
   width: 44px;
@@ -603,7 +601,6 @@ color: black;
   width: 400px;
 }
 }
-
 
 /* FULL HD співпраця*/
 
@@ -738,7 +735,6 @@ color: var(--black);
 
 }
 
-/* ///FULL HD */
 
 /* -------------------------------------///СПІВПРАЦЯ----------------------------------------------- */
 
@@ -820,8 +816,7 @@ margin: 20px auto 0;
 
 }
 
-
-/* FULL HD тарифы */
+/* Ноутбуки + HD тарифы */
 
 @media screen and (min-width: 1280px) {
 
@@ -899,11 +894,9 @@ margin-top: 65px;
 
 }
 
-/* ///FULL HD */
-
 /* ---------------------------------------///ТАРИФЫ------------------------------------------------- */
 
-/* -----------------------------СЕКЦИЯ ПРО CRM------------------------------------------------- */
+/* -------------------------------------СЕКЦИЯ ПРО CRM------------------------------------------------- */
 
 .section-crm {
   padding-top: 15px;
@@ -960,8 +953,7 @@ color: black;
 
 .crm-btn {
   border-radius: 8px;
-width: 338px;
-height: 55px;
+  padding: 42px 80px;
 background: #efa201;
 font-weight: 600;
 font-size: 16px;
@@ -972,9 +964,59 @@ display: block;
 margin: 0 auto;
 }
 
+/* Ноутбуки + FULL-HD CRM */
+
+@media screen and (min-width: 1280px) {
+
+  .section-crm {
+    padding-bottom: 360px;
+  }
+
+.subtitle-crm {
+font-weight: 700;
+font-size: 60px;
+line-height: 110%;
+}
+
+.description-crm {
+  font-family: var(--font-family);
+font-weight: 400;
+font-size: 24px;
+line-height: 140%;
+color: var(--777777);
+}
+
+.crm-wrapper {
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 0 auto;
+}
+
+.crm-box {
+  width: calc(50% - 10px);
+  box-sizing: border-box;
+}
+
+.crm-box-for-desktop {
+  width: calc(50% - 10px);
+  box-sizing: border-box;
+}
+
+
+.crm-btn {
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 100%;
+  text-align: center;
+  color: var(--black);
+}
+
+}
+
 /* -----------------------------///СЕКЦИЯ ПРО CRM------------------------------------------------- */
 
-/* ------------------------------------ФОРМА ЗАЯВКИ------------------------------------------------- */
+/* --------------------------------ФОРМА ЗАЯВКИ------------------------------------------------- */
 
 .section-form {
   padding-top: 120px;
@@ -1037,18 +1079,93 @@ border: none;
 }
 
 
-.form-brn {
+.form-btn {
   border-radius: 12px;
   padding: 32px;
-  width: 326px;
+ 
+  width: 375px;
   height: 93px;
   background: black;
-margin: 0 auto;
+margin: 16px auto 0;
 font-weight: 600;
 font-size: 24px;
 line-height: 100%;
 text-align: center;
 color: white;
+}
+
+/* Ноутбуки + FULL-HD форма заявки */
+
+@media screen and (min-width: 1280px) {
+
+  .section-form {
+height: 480px;
+  }
+  
+  .title-form {
+font-weight: 700;
+font-size: 60px;
+line-height: 110%;
+  }
+
+  
+
+  .form-dscr {
+font-weight: 400;
+font-size: 24px;
+line-height: 120%;
+  }
+
+  .form-flex-for-desktop {
+    display: flex;
+    align-items: flex-end; /* выравниваем кнопку по нижнему краю */
+    gap: 24px;
+   
+  }
+
+
+
+  
+  .form-fields-wrapper {
+    display: flex;
+    flex: 1;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .flex-group-for-desktop {
+    padding-bottom: 9px;
+  }
+
+  .form-group,
+  .flex-group-for-desktop {
+    flex: 1 1 20%;
+    box-sizing: border-box;
+  }
+
+  
+  
+input {
+
+font-weight: 400;
+font-size: 20px;
+line-height: 120%;
+color: var(--000000-400);
+}
+  
+  .form-btn {
+    background: black;
+    color: white;
+    padding: 16px 32px;
+    border-radius: 10px;
+    font-size: 18px;
+    height: 90px;
+    width: 326px;
+    white-space: nowrap;
+  }
+  
+  
+
 }
 
 
