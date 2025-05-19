@@ -560,9 +560,56 @@ text-align: center;
 color: black;
 }
 
-/* FULL HD */
+/* ноуты співпраця */
 
-@media screen and (min-width: 1881px) {
+@media screen and (min-width: 767px) {
+  
+  .subtitle-spivpracia {
+    margin-bottom: 20px;
+  }
+
+  .mustang-picture {
+    right: 0;
+  }
+
+  .light {
+    right: 1%;
+  }
+
+.red-light {
+  right: 1%;
+}
+  .spivpracia-dscr {
+    font-size: 25px ;
+  }
+
+  .width-1 {
+  width: 1000px;
+}
+
+.width-2 {
+  width: 700px;
+}
+
+.width-3 {
+  width: 700px;
+}
+
+.width-4 {
+  width: 900px;
+}
+
+.spivpracia-consultacia-btn {
+  width: 400px;
+}
+}
+
+
+/* FULL HD співпраця*/
+
+@media screen and (min-width: 1600px) {
+
+  
   .section-spivpracia {
     padding-top: 94px;
     padding-bottom: 95px;
@@ -621,6 +668,7 @@ color: var(--white);
   gap: 310px;
 }
 
+
 .width-1 {
   width: 1250px;
 }
@@ -636,6 +684,9 @@ color: var(--white);
 .width-4 {
   width: 900px;
 }
+
+
+
 
 
 
@@ -762,9 +813,9 @@ margin-top: 20px;
 }
 
 
-/* FULL HD */
+/* FULL HD тарифы */
 
-@media screen and (min-width: 1881px) {
+@media screen and (min-width: 1440px) {
 
   .section-trifi {
     padding: 0px 190px;
@@ -1085,9 +1136,9 @@ color: #d8d8d8;
  
   
  /* -----------------------------------------------FULL HD MEDIA------------------------------------------ */
-  @media screen and (min-width: 1881px) {
+  @media screen and (min-width: 1440px) {
     .container {
-      min-width:1024 ;
+      min-width:1440 ;
       max-width: 1680px;
       padding: 0 120px;
       margin: 0 auto;
