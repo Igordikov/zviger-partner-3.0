@@ -782,7 +782,7 @@ gap: 23px;
 align-items: center;
 border-radius: 4px;
 padding: 14px 23px;
-width: 342px;
+width: 100%;
 background: #f9f2e5;
 margin: 0 auto;
 }
@@ -798,7 +798,7 @@ margin: 0 auto;
 }
 
 .tarifi-text {
-  width: 215px;
+width: 100%;
 font-weight: 700;
 font-size: 16px;
 line-height: 140%;
@@ -815,9 +815,9 @@ text-align: center;
 color: black;
   border-radius: 4px;
 padding: 19px 37px;
-
 background: #efa201;
-margin-top: 20px;
+margin: 20px auto 0;
+
 }
 
 
@@ -884,7 +884,7 @@ color: var(--black);
 .tarifi-btn {
   border-radius: 8px;
 padding: 42px 80px;
-width: 647px;
+
 margin: 0 auto;
 font-family: var(--font-family);
 font-weight: 600;
