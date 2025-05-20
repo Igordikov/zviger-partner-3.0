@@ -1166,7 +1166,7 @@ color: var(--000000-400);
     border-radius: 10px;
     font-size: 18px;
     height: 90px;
-    width: 326px;
+    max-width: 326px;
     white-space: nowrap;
   }
   
