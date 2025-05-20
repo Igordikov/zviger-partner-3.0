@@ -191,22 +191,23 @@ transition: background-color 0.3s ease;
 
   /* ---------------------------------СЕКЦИЯ УСЛУГИ------------------------------- */
   .service-section {
-    padding: 53px 0 25px 0;
+    padding: 60px 0 25px 0;
   }
-.subtitle-text {
-
+.subtitle-text-uslugi {
   font-weight: 700;
-  font-size: 32px;
-  line-height: 120%;
+  font-size: 28px;
+  line-height: 100%;
   color: #000;
+  margin-bottom: 24px;
 }
 
 .service-wrapper {
-  margin-top: 20px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
+
 }
 
 .service-wrapper.expanded .service-description {
@@ -218,9 +219,9 @@ transition: background-color 0.3s ease;
   display: flex;
   align-items: center;
   border-radius: 8px;
-padding: 10px 23px;
-width: 320px;
-height: 75px;
+padding: 10px 0 10px 20px;
+width: 100%;
+min-height: 75px;
 background-color: #efa201;
 
 position: relative;
@@ -233,8 +234,10 @@ line-height: 120%;
 color: #000;
 cursor: pointer;
 transition: border-radius 0.3s;
+}
 
-
+.service-card-text {
+  width: 95%;
 }
 
 .service-description {
@@ -262,13 +265,13 @@ width: 320px;
 
 .service-card::after {
   content: "+";
-  font-size: 34px;
-  font-weight: bold;
+  font-size: 30px;
+  font-weight: 400;
   position: absolute;
   right: 20px;
   top: 50%;
   transform: translateY(-50%);
-  color: #333;
+  color: black;
   cursor: pointer;
 }
 
