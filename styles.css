@@ -326,21 +326,27 @@ width: 100%;
 
 
 .section-perevagi {
-  padding: 30px 0 30px 0;
+  padding: 30px 0 60px 0;
 }
 .perevagi-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 15px;
 
 }
 
 .subtitle-perevagi {
   font-family: var(--second-family);
 font-weight: 700;
-font-size: 32px;
-line-height: 120%;
+font-size: 24px;
+line-height: 100%;
 color: var(--black);
+margin-bottom: 12px;
+}
+
+.perevagi-text {
+  font-size: 16px;
+  line-height: 115%;
+  margin-bottom: 24px;
 }
 
 .perevagi-slider {
@@ -367,7 +373,6 @@ color: var(--black);
   background-color: #f9f2e5;
   display: flex;
   flex-direction: column;
-  gap: 15px;
   justify-content: flex-start; /* ← заменили */
 
   margin-right: 10px;
@@ -376,6 +381,10 @@ color: var(--black);
 
 .perevagi-card svg {
   flex-shrink: 0;
+}
+
+.perevagi-icon {
+margin-bottom: 20px;
 }
 
 .perevagi-card-text {
@@ -390,8 +399,8 @@ color: var(--black);
   background: #fdf6eb;
   border: none;
   border-radius: 6px;
-  width: 34px;
-  height: 34px;
+  width: 40px;
+  height: 40px;
   font-size: 12px;
   cursor: pointer;
   display: flex; /* Для центрирования стрелок, если они текстовые */
@@ -402,9 +411,23 @@ color: var(--black);
 .arrows-box-perevagi {
   display: flex;
   gap: 10px;
-  align-self: flex-end; /* <-- сместит вправо */
+  align-self: flex-end;
   margin-right: 10px; /* Если слайдер 320px, а кнопки выровнены по perevagi-wrapper */
                      /* Лучше выравнивать кнопки относительно самого слайдера */
+margin-bottom: 12px;
+}
+
+.perevagi-title {
+  font-size: 18px;
+  line-height: 115%;
+  margin-bottom: 12px;
+  color: black;
+}
+
+.perevagi-card-text {
+  font-size: 14px;
+  line-height: 140%;
+  color: black;
 }
 
 .perevagi-crm-card {
