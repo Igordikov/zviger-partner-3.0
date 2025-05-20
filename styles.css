@@ -948,24 +948,24 @@ padding: 30px 0 60px 0
 
 .subtitle-crm {
   font-weight: 700;
-  font-size: 32px;
-  line-height: 110%;
-  color: black;
+  font-size: 24px;
+  line-height: 100%;
   margin-bottom: 12px;
+  color: black;
 }
 
 .description-crm {
   font-weight: 400;
   font-size: 16px;
   line-height: 140%;
-  color: #777;
-  margin-bottom: 20px;
+  color: black;
+  margin: 24px 0;
 }
 
 .crm-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 30px;
 }
 
 .crm-box {
@@ -975,7 +975,7 @@ padding: 30px 0 60px 0
   border-radius: 8px;
 padding: 30px;
 background: #f9f2e5;
-margin-bottom: 20px;
+
 }
 
 .number-crm {
@@ -992,7 +992,9 @@ font-weight: 700;
 font-size: 16px;
 line-height: 140%;
 color: black;
+
 }
+
 
 .crm-btn {
   height: 55px;
@@ -1003,7 +1005,7 @@ color: black;
 background: #efa201;
 font-weight: 600;
 font-size: 16px;
-line-height: 100%;
+line-height: 150%;
 text-align: center;
 color: black;
 
