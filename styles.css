@@ -130,7 +130,7 @@ text-shadow: 0 0 77px rgba(0, 0, 0, 0.33);
     display: block;
     border-radius: 8px;
     padding: 20px 40px;
-    width: 285px;
+    max-width: 285px;
     
     background-color:  #ffb61d;
     margin: 0 auto;
