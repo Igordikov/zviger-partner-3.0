@@ -331,16 +331,17 @@ width: 100%;
 .perevagi-wrapper {
   display: flex;
   flex-direction: column;
-
+  /* Если .perevagi-wrapper находится внутри .container,
+     он должен по умолчанию занимать доступную ширину .container */
 }
 
 .subtitle-perevagi {
   font-family: var(--second-family);
-font-weight: 700;
-font-size: 24px;
-line-height: 100%;
-color: var(--black);
-margin-bottom: 12px;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 100%;
+  color: var(--black);
+  margin-bottom: 12px;
 }
 
 .perevagi-text {
@@ -350,71 +351,41 @@ margin-bottom: 12px;
 }
 
 .perevagi-slider {
-  overflow: hidden; /* Обязательно для обрезки лишних карточек */
-  max-width: 320px; /* Фиксированная максимальная ширина видимой области */
-  width: 100%;      /* Для адаптивности до max-width */
-  margin: 0 auto;   /* Если нужно центрировать сам слайдер */
+  overflow: hidden;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box; /* <<< Добавлено */
 }
 
 .perevagi-track {
   display: flex;
-  /* gap: 10px; */ /* Убрал отсюда, т.к. добавляем отступ к карточкам для более предсказуемого offsetWidth */
-  transition: transform 0.4s ease; /* 400ms - важно для JS */
-  /* Если убрали gap, то начальное положение будет без отступов слева от первой карты */
+  transition: transform 0.4s ease;
 }
 
 .perevagi-card {
-  box-sizing: border-box; /* !!!!! ОЧЕНЬ ВАЖНО для корректных размеров с padding !!!!! */
-  
   box-sizing: border-box;
-  min-width: 320px;
+  width: 100%;            /* Карточка будет 100% ширины .perevagi-slider */
+  flex-shrink: 0;
   padding: 25px 17px;
   border-radius: 10px;
   background-color: #f9f2e5;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* ← заменили */
-
+  justify-content: flex-start;
   margin-right: 10px;
-  
 }
 
-.perevagi-card svg {
+.perevagi-track .perevagi-card:last-child {
+  margin-right: 0;
+}
+
+.perevagi-card svg.perevagi-icon {
   flex-shrink: 0;
+  margin-bottom: 20px;
 }
 
 .perevagi-icon {
-margin-bottom: 20px;
-}
-
-.perevagi-card-text {
-  width: 85%; /* Это может быть причиной проблем с паддингами, если текст слишком длинный */
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 140%;
-  color: black;
-}
-
-.arrow-btn {
-  background: #fdf6eb;
-  border: none;
-  border-radius: 6px;
-  width: 40px;
-  height: 40px;
-  font-size: 12px;
-  cursor: pointer;
-  display: flex; /* Для центрирования стрелок, если они текстовые */
-  align-items: center;
-  justify-content: center;
-}
-
-.arrows-box-perevagi {
-  display: flex;
-  gap: 10px;
-  align-self: flex-end;
-  margin-right: 10px; /* Если слайдер 320px, а кнопки выровнены по perevagi-wrapper */
-                     /* Лучше выравнивать кнопки относительно самого слайдера */
-margin-bottom: 12px;
+  margin-bottom: 20px;
 }
 
 .perevagi-title {
@@ -425,25 +396,58 @@ margin-bottom: 12px;
 }
 
 .perevagi-card-text {
+  width: 85%; /* Оставляем, как было. Возможно, понадобится调整, если карточка станет значительно шире. */
+  font-weight: 400;
   font-size: 14px;
   line-height: 140%;
   color: black;
+  flex-grow: 1;
+}
+
+.arrow-btn {
+  background: #fdf6eb;
+  border: none;
+  border-radius: 6px;
+  width: 40px;
+  height: 40px;
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arrows-box-perevagi {
+  display: flex;
+  gap: 10px;
+  align-self: flex-end; /* Выравнивает блок стрелок по правому краю .perevagi-wrapper */
+  /* Если .perevagi-wrapper и .perevagi-slider теперь шире,
+     убедитесь, что это выравнивание по-прежнему выглядит хорошо.
+     Возможно, margin-right нужно будет подогнать под новую ширину. */
+  margin-right: 10px; /* Пример, если .perevagi-wrapper не имеет правого padding */
+  margin-bottom: 12px;
 }
 
 .perevagi-crm-card {
   background: var(--efa201);
+}
+
+.perevagi-crm-card .perevagi-title,
+.perevagi-crm-card .perevagi-card-text {
   color: black;
 }
 
 .perevagi-crm-btn {
   padding: 14px 16px;
-background: var(--black);
-text-align: center;
-color: var(--white);
-font-size: 16px;
+  background: var(--black);
+  text-align: center;
+  color: var(--white);
+  font-size: 16px;
   border-radius: 12px;
+  text-decoration: none;
+  margin-top: auto;
+  align-self: flex-start;
 }
-
 /* --------------------------------------///СЕКЦИЯ ПЕРЕВАГИ----------------------------------- */
 
 /* -------------------------------------СПІВПРАЦЯ----------------------------------------------- */
