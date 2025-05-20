@@ -102,8 +102,8 @@
     text-shadow: 0 0 77px rgba(0, 0, 0, 0.55);
     z-index: 1;
 font-weight: 700;
-font-size: 36px;
-line-height: 115%;
+font-size: 44px;
+line-height: 100%;
 text-transform: uppercase;
 color:  #ffb61d;
 background: linear-gradient(270deg, #efa201 0%, #ffb61d 100%);
@@ -113,13 +113,14 @@ background-clip: text;
 
   .subtitle-hero-text {
     position: relative;
-    font-family:'Codec Pro';
+    font-family:'Roboto';
     text-align: center;
   margin: 260px auto 32px;
 line-height: 115%;
 text-transform: uppercase;
 color:  #efefef;
 text-shadow: 0 0 77px rgba(0, 0, 0, 0.33);
+font-size: 20px;
   }
 
   .desktop-title-part {
@@ -136,8 +137,8 @@ text-shadow: 0 0 77px rgba(0, 0, 0, 0.33);
     margin: 0 auto;
     position: relative; /* Поверх затемнения */
 font-weight: 600;
-font-size: 18px;
-line-height: 100%;
+font-size: 16px;
+line-height: 115%;
 text-align: center;
 color: black;
 transition: background-color 0.3s ease;
