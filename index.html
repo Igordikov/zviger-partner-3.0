@@ -1012,5 +1012,19 @@
 
 <!-- -----------------------------------------------------///ФОРМА-------------------------------------- -->
 
+
+<!-- --------------------------Защита от автоскролла---------------- -->
+<script>
+  window.addEventListener('load', () => {
+    // Сброс якорного скролла (если есть # в URL)
+    if (window.location.hash) {
+      history.replaceState(null, '', window.location.pathname + window.location.search);
+      window.scrollTo(0, 0); // Принудительно наверх
+    }
+  });
+</script>
+
+
+
 </body>
 </html>
