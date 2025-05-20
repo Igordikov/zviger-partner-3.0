@@ -1094,12 +1094,12 @@ text-align: center;
 color: white;
 }
 
-/* Ноутбуки + FULL-HD форма заявки */
+/* Планшеты + ноутбуки форма заявки */
 
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 768px) {
 
   .section-form {
-height: 480px;
+height: 680px;
   }
   
   .title-form {
@@ -1120,12 +1120,10 @@ line-height: 120%;
     display: flex;
     align-items: flex-end; /* выравниваем кнопку по нижнему краю */
     gap: 24px;
+    flex-wrap: wrap;
    
   }
 
-
-
-  
   .form-fields-wrapper {
     display: flex;
     flex: 1;
@@ -1135,6 +1133,7 @@ line-height: 120%;
 
   .flex-group-for-desktop {
     padding-bottom: 9px;
+  
   }
 
   .form-group,
@@ -1168,6 +1167,20 @@ color: var(--000000-400);
 
 }
 
+/* FULL-HD форма заявки */
+
+@media screen and (min-width: 1800px) {
+.section-form {
+ height: 480px;
+;
+
+}
+
+  .form-flex-for-desktop {
+  flex-wrap: nowrap;
+}
+
+}
 
 /* ------------------------------------///ФОРМА ЗАЯВКИ------------------------------------------------- */
 
