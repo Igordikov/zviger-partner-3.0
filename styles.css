@@ -1067,25 +1067,26 @@ color: var(--777777);
 /* --------------------------------ФОРМА ЗАЯВКИ------------------------------------------------- */
 
 .section-form {
-  padding-top: 120px;
- height: 927px;
+padding: 60px 0;
  background: #efa201;
 
 }
 
+
+
 .title-form {
 margin-bottom: 12px;
 font-weight: 700;
-font-size: 32px;
-line-height: 110%;
+font-size: 24px;
+line-height: 100%;
 color: black;
 }
 
 .form-dscr {
-  margin-bottom: 40px;
+  margin-bottom: 24px;
 font-weight: 400;
 font-size: 16px;
-line-height: 120%;
+line-height: 115%;
 color: black;
 }
 
@@ -1120,7 +1121,12 @@ padding: 32px 24px;
 max-height: 93px;
 background: white;
 border: none;
+font-weight: 400;
+font-size: 20px;
+line-height: 120%;
+
 }
+
 
 .country-flag {
   display: flex;
@@ -1134,7 +1140,7 @@ border: none;
  width: 100%;
 
   background: black;
-margin: 16px auto 0;
+margin: 24px auto 0;
 font-weight: 600;
 font-size: 24px;
 line-height: 100%;
