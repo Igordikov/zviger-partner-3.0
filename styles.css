@@ -1246,6 +1246,12 @@ padding-top: 80px;
 background: black;
 }
 
+.logo-position {
+  display: flex;
+flex-direction: column;
+gap: 24px;
+}
+
 .footer-wrapp {
   display: flex;
   flex-direction: column;
