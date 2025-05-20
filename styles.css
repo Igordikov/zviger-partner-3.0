@@ -114,11 +114,11 @@ background-clip: text;
   .subtitle-hero-text {
     position: relative;
     font-family: "Roboto", sans-serif;
-    text-align: center;
+    text-align: start;
   margin: 200px auto 32px;
 line-height: 115%;
 text-transform: uppercase;
-color:  #efefef;
+color:  white;
 text-shadow: 0 0 77px rgba(0, 0, 0, 0.33);
 font-size: 20px;
   }
@@ -131,7 +131,7 @@ font-size: 20px;
     display: block;
     border-radius: 8px;
     padding: 20px 40px;
-    max-width: 285px;
+ width: 100%;
     
     background-color:  #ffb61d;
     margin: 0 auto;
