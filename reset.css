@@ -27,6 +27,13 @@
 }
 
 /* Reset styles */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 html {
     scroll-behavior: smooth;
   }
@@ -35,6 +42,8 @@ html {
     font-family: "Roboto", sans-serif;
     background-color: #fff;
     color: #434455;
+     margin: 0;
+  padding: 0;
   }
   
   main {
