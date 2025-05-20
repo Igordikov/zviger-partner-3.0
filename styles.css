@@ -299,13 +299,14 @@ padding: 30px 0;
 }
 
 .o-nas-wrapper {
+  padding-top: 24px;
   display: flex;
   flex-direction: column;
  
 }
 
 .o-nas-picture {
-margin: 0 auto 24px;
+
 }
 
 .o-nas-dscr{
