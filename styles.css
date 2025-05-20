@@ -245,7 +245,7 @@ transition: border-radius 0.3s;
   margin-bottom: 12px;
   overflow: hidden;
   transition: max-height 0.4s ease, padding 0.4s ease;
-  padding: 0 20px; /* добавим боковые отступы сразу */
+  padding: 0 20px; 
 width: 100%;
   border-radius: 0 0 8px 8px;
   color: #333;
@@ -288,9 +288,10 @@ width: 100%;
 .subtitle-text-o-nas {
   font-family: var(--second-family);
 font-weight: 700;
-font-size: 32px;
-line-height: 110%;
+font-size: 24px;
+line-height: 100%;
 color: var(--black);
+margin-bottom: 24px;
 }
 
 .section-o-nas {
@@ -300,17 +301,18 @@ padding: 30px 0;
 .o-nas-wrapper {
   display: flex;
   flex-direction: column;
- gap: 40px;
+ 
 }
 
 .o-nas-picture {
-  margin: 0 auto;
+margin: 0 auto 24px;
 }
 
 .o-nas-dscr{
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 12px;
+  color: #000;
 }
 
 /* ------------------------------------///СЕКЦИЯ О НАС-------------------------------------- */
@@ -322,7 +324,7 @@ padding: 30px 0;
 
 
 .section-perevagi {
-  padding: 25px 0 50px 0;
+  padding: 30px 0 30px 0;
 }
 .perevagi-wrapper {
   display: flex;
