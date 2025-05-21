@@ -1352,12 +1352,13 @@ color: black;
 
 .deepest-box {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  align-items: start;
+  padding: 15px 0;
   margin: 40px auto 0;
   border-top: 0.89px solid #767676;
-
-height: 41px;
+gap: 10px;
 }
 
 .deeppest-info-1 {
