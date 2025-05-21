@@ -857,79 +857,50 @@
 <!-- ПЕРЕВАГИ -->
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const track = document.querySelector('.perevagi-track');
-  // Преобразуем NodeList в массив для удобства, хотя для offsetLeft это не строго обязательно
-  const cards = Array.from(document.querySelectorAll('.perevagi-card'));
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
-
-  if (!track || cards.length === 0 || !prevBtn || !nextBtn) {
-    console.error('Один или несколько элементов слайдера не найдены!');
-    return;
-  }
-
-  let currentIndex = 0;
-  const totalCards = cards.length;
-
-  function updateSliderPosition() {
-    // Убедимся, что currentIndex находится в допустимых границах
-    if (currentIndex >= 0 && currentIndex < totalCards) {
-      const targetCard = cards[currentIndex];
-      // Смещение будет равно отрицательному значению offsetLeft целевой карточки.
-      // offsetLeft дает расстояние от левого края родительского элемента (трека)
-      // до левого края текущей карточки, учитывая все предыдущие элементы и их margin.
-      const offset = -targetCard.offsetLeft;
-
-      // --- Отладочная информация ---
-      console.log('--- Обновление позиции слайдера ---');
-      console.log('Текущий индекс (currentIndex):', currentIndex);
-      // console.log('Целевая карточка:', targetCard); // Можно раскомментировать для просмотра самого элемента
-      console.log('targetCard.offsetLeft:', targetCard.offsetLeft);
-      console.log('Рассчитанное смещение (offset):', offset);
-      // -----------------------------
-
-      track.style.transform = `translateX(${offset}px)`;
-    } else {
-      // Эта ситуация не должна возникать при правильной логике кнопок, но для безопасности:
-      console.error('Недопустимый currentIndex:', currentIndex);
+  document.addEventListener('DOMContentLoaded', () => {
+    const track = document.querySelector('.perevagi-track');
+    const cards = Array.from(document.querySelectorAll('.perevagi-card'));
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+  
+    if (!track || cards.length === 0 || !prevBtn || !nextBtn) {
+      console.error('Один или несколько элементов слайдера не найдены!');
+      return;
     }
-  }
-
-  nextBtn.addEventListener('click', () => {
-    if (currentIndex < totalCards - 1) {
-      currentIndex++;
-    } else {
-      currentIndex = 0; // Зацикливаем на начало
+  
+    let currentIndex = 0;
+    const totalCards = cards.length;
+  
+    function updateSliderPosition() {
+      if (currentIndex >= 0 && currentIndex < totalCards) {
+        const targetCard = cards[currentIndex];
+        track.scrollTo({
+          left: targetCard.offsetLeft,
+          behavior: 'smooth'
+        });
+      } else {
+        console.error('Недопустимый currentIndex:', currentIndex);
+      }
     }
-    updateSliderPosition();
-  });
-
-  prevBtn.addEventListener('click', () => {
-    if (currentIndex > 0) {
-      currentIndex--;
-    } else {
-      currentIndex = totalCards - 1; // Зацикливаем на конец
-    }
-    updateSliderPosition();
-  });
-
-  // offsetLeft может измениться, если меняется ширина контейнера слайдера
-  // (и, следовательно, ширина карточек, так как у них width: 100%).
-  // Поэтому важно обновлять позицию при изменении размера окна.
-  let resizeTimeout;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(() => {
-      console.log('--- Изменение размера окна (вызов updateSliderPosition) ---');
+  
+    nextBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % totalCards;
       updateSliderPosition();
-    }, 250);
+    });
+  
+    prevBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + totalCards) % totalCards;
+      updateSliderPosition();
+    });
+  
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(updateSliderPosition, 250);
+    });
+  
+    updateSliderPosition();
   });
-
-  // Вызываем один раз при загрузке, чтобы слайдер встал на начальную позицию (обычно первую карточку).
-  // Это также гарантирует, что offsetLeft будет рассчитан после полной отрисовки.
-  updateSliderPosition();
-});
   </script>
   
 
