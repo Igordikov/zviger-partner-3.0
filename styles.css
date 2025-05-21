@@ -331,8 +331,7 @@ width: 100%;
 .perevagi-wrapper {
   display: flex;
   flex-direction: column;
-  /* Если .perevagi-wrapper находится внутри .container,
-     он должен по умолчанию занимать доступную ширину .container */
+  
 }
 
 .subtitle-perevagi {
@@ -358,6 +357,7 @@ width: 100%;
 }
 
 .perevagi-track {
+  position: relative;
   display: flex;
   transition: transform 0.4s ease;
 }
@@ -396,7 +396,7 @@ width: 100%;
 }
 
 .perevagi-card-text {
-  width: 85%; /* Оставляем, как было. Возможно, понадобится调整, если карточка станет значительно шире. */
+  width: 85%; 
   font-weight: 400;
   font-size: 14px;
   line-height: 140%;
@@ -420,11 +420,8 @@ width: 100%;
 .arrows-box-perevagi {
   display: flex;
   gap: 10px;
-  align-self: flex-end; /* Выравнивает блок стрелок по правому краю .perevagi-wrapper */
-  /* Если .perevagi-wrapper и .perevagi-slider теперь шире,
-     убедитесь, что это выравнивание по-прежнему выглядит хорошо.
-     Возможно, margin-right нужно будет подогнать под новую ширину. */
-  margin-right: 10px; /* Пример, если .perevagi-wrapper не имеет правого padding */
+  align-self: flex-end; 
+ 
   margin-bottom: 12px;
 }
 
@@ -443,6 +440,7 @@ width: 100%;
   text-align: center;
   color: var(--white);
   font-size: 16px;
+
   border-radius: 12px;
   text-decoration: none;
  margin-top: 12px;
@@ -1142,8 +1140,8 @@ line-height: 120%;
   background: black;
 margin: 24px auto 0;
 font-weight: 600;
-font-size: 24px;
-line-height: 100%;
+font-size: 16px;
+line-height: 150%;
 text-align: center;
 color: white;
 }
@@ -1242,7 +1240,7 @@ color: var(--000000-400);
 /* -------------------------------------ФУТЕР--------------------------------------------------------- */
 
 .section-footer {
-padding-top: 80px;
+padding-top: 60px;
 background: black;
 }
 
@@ -1255,12 +1253,19 @@ gap: 24px;
 .footer-wrapp {
   display: flex;
   flex-direction: column;
-  gap: 53px;
+
+}
+
+.footer-dscr {
+  color: white;
+  font-size: 14px;
+
 }
 
 .footer-lang {
   display: flex;
   gap: 10px;
+  line-height: 120%;
 }
 
 .footer-lang button {
@@ -1276,6 +1281,7 @@ gap: 24px;
   font-size: 17px;
   line-height: 120%;
   transition: all 0.3s ease;
+margin: 24px 0 24px 0;
 }
 
 /* Сброс начальных цветов */
@@ -1294,14 +1300,16 @@ gap: 24px;
 
 .footer-subtitle {
 font-weight: 700;
-font-size: 53px;
-line-height: 120%;
+font-size: 28px;
+line-height: 100%;
 color: white;
+margin-bottom: 24px;
 }
 
 .footer-social {
   display: flex;
   gap: 22px;
+  margin-bottom: 24px;
 }
 
 .contact-footer-list {
@@ -1322,8 +1330,8 @@ margin-bottom: 9px;
 .contact-footer-info {
 
 font-weight: 500;
-font-size: 21px;
-line-height: 120%;
+font-size: 16px;
+line-height: 115%;
 letter-spacing: -0.02em;
 color: white;
 }
@@ -1331,13 +1339,13 @@ color: white;
 .footer-btn {
   border-radius: 7px;
   padding: 14px 35px;
-  width: 224px;
+  width: 100%;
   height: 51px;
   background: #efa201;
-  
+  margin-top: 24px;
 font-weight: 600;
-font-size: 17px;
-line-height: 100%;
+font-size: 16px;
+line-height: 150%;
 letter-spacing: -0.02em;
 color: black;
 }
@@ -1348,13 +1356,13 @@ color: black;
   align-items: center;
   margin: 40px auto 0;
   border-top: 0.89px solid #767676;
-padding: 17px 8px;
+
 height: 41px;
 }
 
 .deeppest-info-1 {
   font-weight: 400;
-font-size: 5px;
+font-size: 12px;
 line-height: 120%;
 color: #d8d8d8;
 }
@@ -1365,7 +1373,7 @@ color: #d8d8d8;
   align-items: center;
   gap: 17px;
 font-weight: 400;
-font-size: 5px;
+font-size: 12px;
 line-height: 120%;
 color: #d8d8d8;
 }
@@ -1584,6 +1592,9 @@ color: var(--black);
 
 /* -------------------------------FULL HD  ПЕРЕВАГИ-------------------------------------- */
 
+
+
+
 .subtitle-perevagi {
   font-family: var(--second-family);
   font-weight: 700;
@@ -1591,6 +1602,8 @@ color: var(--black);
   line-height: 100%;
   color: var(--black);
 }
+
+
 
 .perevagi-text {
   font-family: var(--font-family);
@@ -1601,6 +1614,7 @@ color: var(--black);
   margin-top: 20px;
   margin-bottom: 66px;
 }
+
 
 .perevagi-slider {
   max-width: 100%;
@@ -1678,6 +1692,9 @@ color: var(--white);
 padding: 24px 32px;
 background: var(--black);
 }
+
+
+
 
 
 /* --------------------------------///FULL HD  ПЕРЕВАГИ-------------------------------------- */
